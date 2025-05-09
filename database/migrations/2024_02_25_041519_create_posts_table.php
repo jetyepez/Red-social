@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->longText('content');
             $table->string('thumbnail')->nullable();
+            $table->json('documents')->nullable();
             $table->enum('status', ['published', 'pribate'])->default('published');
             $table->unsignedBigInteger('likes')->default(0);
             $table->unsignedBigInteger('comments')->default(0);

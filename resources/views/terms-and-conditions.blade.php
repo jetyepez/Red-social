@@ -1,99 +1,62 @@
 @extends('layouts.guest')
-@section('title', 'Terms and Conditions')
-@section('content')
+@section('title', 'Términos y Condiciones')
+@section('contenido')
     <div class="container mx-auto text-black font-medium py-4">
-        <h2 class="text-blue-600 text-3xl font-bold text-center mb-4">Terms and Conditions</h2>
+        <h2 class="text-blue-600 text-3xl font-bold text-center mb-4">Términos y Condiciones</h2>
 
-        <p class="mb-6 text-black font-bold">Welcome to snpoc!</p>
+        <p class="mb-6 text-black font-bold">¡Bienvenido a snpoc!</p>
 
-        <p class="mb-6">These terms and conditions outline the rules and regulations for the use of Social Network
-            Platform For
-            Online Communication's Website, located at snpoc.org.</p>
+        <p class="mb-6">Estos términos y condiciones establecen las reglas y regulaciones para el uso del sitio web de la Plataforma de Red Social para Comunicación en Línea, ubicado en snpoc.org.</p>
 
-        <p class="mb-6">By accessing this website we assume you accept these terms and conditions. Do not continue
-            to use snpoc
-            if you do not agree to take all of the terms and conditions stated on this page.</p>
+        <p class="mb-6">Al acceder a este sitio web, asumimos que aceptas estos términos y condiciones. No continúes usando snpoc si no estás de acuerdo con todos los términos y condiciones establecidos en esta página.</p>
 
-        <p class="mb-6">The following terminology applies to these Terms and Conditions, Privacy Statement and
-            Disclaimer Notice
-            and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and
-            compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us",
-            refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms
-            refer to the offer, acceptance and consideration of payment necessary to undertake the process of our
-            assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's
-            needs in respect of provision of the Company's stated services, in accordance with and subject to,
-            prevailing law of mm. Any use of the above terminology or other words in the singular, plural,
-            capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
-        </p>
+        <p class="mb-6">La siguiente terminología se aplica a estos Términos y Condiciones, Declaración de Privacidad y Aviso de Descargo de Responsabilidad y todos los Acuerdos: "Cliente", "Tú" y "Tu" se refiere a ti, la persona que inicia sesión en este sitio web y cumple con los términos y condiciones de la Compañía. "La Compañía", "Nosotros mismos", "Nos", "Nuestro" y "Nos", se refiere a nuestra Compañía. "Parte", "Partes", o "Nos", se refiere tanto al Cliente como a nosotros mismos. Todos los términos se refieren a la oferta, aceptación y consideración del pago necesario para emprender el proceso de nuestra asistencia al Cliente de la manera más apropiada para el propósito expreso de satisfacer las necesidades del Cliente con respecto a la provisión de los servicios declarados de la Compañía, de acuerdo con y sujeto a la ley vigente. Cualquier uso de la terminología anterior u otras palabras en singular, plural, mayúsculas y/o él/ella o ellos, se consideran intercambiables y por lo tanto se refieren a lo mismo.</p>
 
         <h3 class="text-blue-600 text-lg font-semibold mb-2">Cookies</h3>
 
-        <p class="mb-6">We employ the use of cookies. By accessing snpoc, you agreed to use cookies in agreement
-            with the Social
-            Network Platform For Online Communication's Privacy Policy. </p>
+        <p class="mb-6">Utilizamos cookies. Al acceder a snpoc, aceptaste usar cookies de acuerdo con la Política de Privacidad de la Plataforma de Red Social para Comunicación en Línea.</p>
 
-        <p class="mb-6">Most interactive websites use cookies to let us retrieve the user's details for each visit.
-            Cookies are
-            used by our website to enable the functionality of certain areas to make it easier for people visiting
-            our website. Some of our affiliate/advertising partners may also use cookies.</p>
+        <p class="mb-6">La mayoría de los sitios web interactivos utilizan cookies para permitirnos recuperar los detalles del usuario en cada visita. Las cookies son utilizadas por nuestro sitio web para habilitar la funcionalidad de ciertas áreas y hacer más fácil para las personas que visitan nuestro sitio web. Algunos de nuestros socios afiliados/publicitarios también pueden usar cookies.</p>
 
-        <h3 class="text-blue-600 text-lg font-semibold mb-2">License</h3>
+        <h3 class="text-blue-600 text-lg font-semibold mb-2">Licencia</h3>
 
-        <p class="mb-6">Unless otherwise stated, Social Network Platform For Online Communication and/or its
-            licensors own the
-            intellectual property rights for all material on snpoc. All intellectual property rights are reserved.
-            You may access this from snpoc for your own personal use subjected to restrictions set in these terms
-            and conditions.</p>
+        <p class="mb-6">A menos que se indique lo contrario, la Plataforma de Red Social para Comunicación en Línea y/o sus licenciantes poseen los derechos de propiedad intelectual de todo el material en snpoc. Todos los derechos de propiedad intelectual están reservados. Puedes acceder a esto desde snpoc para tu uso personal sujeto a las restricciones establecidas en estos términos y condiciones.</p>
 
-        <p class="">You must not:</p>
+        <p class="">No debes:</p>
         <ul class="mb-6">
             <li class="flex gap-6"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Republish material from snpoc</li>
+                Republicar material de snpoc</li>
             <li class="flex gap-6"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Sell, rent or sub-license material from snpoc</li>
+                Vender, alquilar o sublicenciar material de snpoc</li>
             <li class="flex gap-6"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Reproduce, duplicate or copy material from snpoc</li>
+                Reproducir, duplicar o copiar material de snpoc</li>
             <li class="flex gap-6"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Redistribute content from snpoc</li>
+                Redistribuir contenido de snpoc</li>
         </ul>
 
-        <p class="mb-6">This Agreement shall begin on the date hereof. Our Terms and Conditions were created with
-            the help of the
-            <a href="https://www.termsandconditionsgenerator.com/">Free Terms and Conditions Generator</a>.
-        </p>
+        <p class="mb-6">Este Acuerdo comenzará en la fecha actual. Nuestros Términos y Condiciones fueron creados con la ayuda del <a href="https://www.termsandconditionsgenerator.com/">Generador de Términos y Condiciones Gratuito</a>.</p>
 
-        <p class="mb-6">Parts of this website offer an opportunity for users to post and exchange opinions and
-            information in
-            certain areas of the website. Social Network Platform For Online Communication does not filter, edit,
-            publish or review Comments prior to their presence on the website. Comments do not reflect the views and
-            opinions of Social Network Platform For Online Communication,its agents and/or affiliates. Comments
-            reflect the views and opinions of the person who post their views and opinions. To the extent permitted
-            by applicable laws, Social Network Platform For Online Communication shall not be liable for the
-            Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of
-            and/or posting of and/or appearance of the Comments on this website.</p>
+        <p class="mb-6">Partes de este sitio web ofrecen una oportunidad para que los usuarios publiquen e intercambien opiniones e información en ciertas áreas del sitio web. La Plataforma de Red Social para Comunicación en Línea no filtra, edita, publica o revisa los Comentarios antes de su presencia en el sitio web. Los Comentarios no reflejan las opiniones y puntos de vista de la Plataforma de Red Social para Comunicación en Línea, sus agentes y/o afiliados. Los Comentarios reflejan las opiniones y puntos de vista de la persona que publica sus opiniones y puntos de vista. En la medida permitida por las leyes aplicables, la Plataforma de Red Social para Comunicación en Línea no será responsable de los Comentarios ni de ninguna responsabilidad, daños o gastos causados y/o sufridos como resultado de cualquier uso y/o publicación y/o aparición de los Comentarios en este sitio web.</p>
 
-        <p class="mb-6">Social Network Platform For Online Communication reserves the right to monitor all Comments and to
-            remove
-            any Comments which can be considered inappropriate, offensive or causes breach of these Terms and
-            Conditions.</p>
+        <p class="mb-6">La Plataforma de Red Social para Comunicación en Línea se reserva el derecho de monitorear todos los Comentarios y eliminar cualquier Comentario que pueda considerarse inapropiado, ofensivo o cause incumplimiento de estos Términos y Condiciones.</p>
 
-        <p>You warrant and represent that:</p>
+        <p>Garantizas y representas que:</p>
 
         <ul class="mb-6">
             <li class="flex gap-6">
@@ -103,8 +66,7 @@
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
 
-                You are entitled to post the Comments on our website and have all necessary licenses and consents to
-                do so;
+                Tienes derecho a publicar los Comentarios en nuestro sitio web y tienes todas las licencias y consentimientos necesarios para hacerlo;
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -113,8 +75,7 @@
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
 
-                The Comments do not invade any intellectual property right, including without limitation copyright,
-                patent or trademark of any third party;
+                Los Comentarios no invaden ningún derecho de propiedad intelectual, incluyendo sin limitación derechos de autor, patentes o marcas comerciales de terceros;
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -123,8 +84,7 @@
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
 
-                The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful
-                material which is an invasion of privacy
+                Los Comentarios no contienen ningún material difamatorio, calumnioso, ofensivo, indecente o de otra manera ilegal que sea una invasión de la privacidad
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -133,19 +93,15 @@
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
 
-                The Comments will not be used to solicit or promote business or custom or present commercial
-                activities or unlawful activity.
+                Los Comentarios no serán utilizados para solicitar o promover negocios o costumbres o presentar actividades comerciales o actividades ilegales.
             </li>
         </ul>
 
-        <p class="mb-6">You hereby grant Social Network Platform For Online Communication a non-exclusive license to
-            use,
-            reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all
-            forms, formats or media.</p>
+        <p class="mb-6">Por la presente, otorgas a la Plataforma de Red Social para Comunicación en Línea una licencia no exclusiva para usar, reproducir, editar y autorizar a otros a usar, reproducir y editar cualquiera de tus Comentarios en todas y cada una de las formas, formatos o medios.</p>
 
-        <h3 class="text-blue-600 text-lg font-semibold mb-2">Hyperlinking to our Content</h3>
+        <h3 class="text-blue-600 text-lg font-semibold mb-2">Hipervínculos a nuestro Contenido</h3>
 
-        <p>The following organizations may link to our Website without prior written approval:</p>
+        <p>Las siguientes organizaciones pueden enlazar a nuestro Sitio Web sin aprobación previa por escrito:</p>
 
         <ul class="mb-6">
             <li class="flex gap-6">
@@ -154,7 +110,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Government agencies;
+                Agencias gubernamentales;
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -162,7 +118,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Search engines;
+                Motores de búsqueda;
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -170,7 +126,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                News organizations;
+                Organizaciones de noticias;
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -178,8 +134,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                Online directory distributors may link to our Website in the same manner as they hyperlink to the
-                Websites of other listed businesses; and
+                Los distribuidores de directorios en línea pueden enlazar a nuestro Sitio Web de la misma manera que enlazan a los Sitios Web de otras empresas listadas; y
             </li>
             <li class="flex gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -187,10 +142,11 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                 </svg>
-                System wide Accredited Businesses except soliciting non-profit organizations, charity shopping
-                malls, and charity fundraising groups which may not hyperlink to our Web site.
+                Empresas acreditadas en todo el sistema excepto organizaciones sin fines de lucro que solicitan, centros comerciales benéficos y grupos de recaudación de fondos benéficos que no pueden enlazar a nuestro sitio web.
             </li>
         </ul>
+
+        <p class="mb-6">Estas organizaciones pueden enlazar a nuestra página de inicio, a publicaciones o a otra información del Sitio Web siempre que el enlace: <br />(a) no sea de ninguna manera engañoso; <br />(b) no implique falsamente patrocinio, respaldo o aprobación de la parte que enlaza y sus productos y/o servicios; y <br />(c) se ajuste al contexto del sitio de la parte que enlaza.</p>
 
         <p class="mb-6">These organizations may link to our home page, to publications or to other Website
             information so long as

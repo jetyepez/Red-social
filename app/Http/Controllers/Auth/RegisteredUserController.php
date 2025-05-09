@@ -54,13 +54,12 @@ class RegisteredUserController extends Controller
             'profile' => $profile,
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
+            'is_private' => 0,
+            'banned_to' => null,
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
-        auth()->user()->sendEmailVerificationNotification();
-
-        return redirect(RouteServiceProvider::VERIFY_EMAIL)->with('status', 'verification-link-sent');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

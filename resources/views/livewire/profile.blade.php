@@ -35,8 +35,7 @@
             <div class="absolute top-0 w-full h-full bg-center bg-cover"
                 style="background-image: url('{{ asset('images/profiles/thumbnails/' . $user->thumbnail) }}'); background-size:cover; background-repead:no-repead;">
             @else
-                <div class="absolute top-0 w-full h-full bg-center bg-cover"
-                    style="background-image: url('https://picsum.photos/id/237/200/300'); background-size:cover; background-repead:no-repead;">
+                <div class="absolute top-0 w-full h-full bg-center bg-cover">
         @endif
         <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
         </div>
@@ -56,7 +55,7 @@
                     <div class="flex flex-wrap justify-center">
                         <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                             <div class="relative">
-                                <img src="{{ asset('images/profiles/' . $user->profile) }}"
+                                <img src="{{ asset('storage/images/profiles/' . $user->profile) }}"
                                     class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-micro max-h-micro"
                                     alt="" width="150px" height="150px">
                             </div>
@@ -64,16 +63,16 @@
                         <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                             <div class="py-6 px-3 sm:mt-0">
                                 @if ($user->username == auth()->user()->username)
-                                    <a href="{{ route('profile-edit', $user->username, 'edit') }}"
+                                    <a href="{{ route('profile-edit', $user->username) }}"
                                         class="bg-blue-500 active:bg-blue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                                         type="button">
-                                        Edit
+                                        Editar
                                     </a>
                                 @else
                                     <a href="{{ url('envoy', $user->id) }}"
                                         class="bg-blue-500 active:bg-blue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                                         type="button">
-                                        Connect
+                                        Conectar
                                     </a>
                                 @endif
                             </div>
@@ -87,27 +86,27 @@
                                     @if ($user->numOfFriends > 0)
                                         <span class="text-sm"> {{ $user->numOfFriends }}
                                             @if ($user->numOfFriends > 1)
-                                                friends
+                                                Amigos
                                             @else
-                                                friend
+                                                Amigo
                                             @endif
                                         </span> <span class="font-bold">|</span>
                                     @endif
                                     @if ($posts->count() > 0)
                                         <span class="text-sm"> {{ $posts->count() }}
                                             @if ($posts->count() > 1)
-                                                posts
+                                                publicaciones
                                             @else
-                                                post
+                                                publicación
                                             @endif
                                         </span> <span class="font-bold">|</span>
                                     @endif
                                     @if ($numOfComments > 0)
                                         <span class="text-sm"> {{ $numOfComments }}
                                             @if ($numOfComments > 1)
-                                                comments
+                                                comentarios
                                             @else
-                                                comment
+                                                comentario
                                             @endif
                                         </span>
                                     @endif
@@ -135,7 +134,7 @@
                     <div class="w-full  lg:w-40 p-4">
                         <div
                             class="h-106 w-full mx-auto bg-gray-100 rounded-lg shadow-md overflow-hidden dark:bg-gray-800 dark:text-gray-200">
-                            <div class="p-6 text-2xl font-semibold">Friends ({{ $user->numOfFriends }})</div>
+                            <div class="p-6 text-2xl font-semibold">Amigos ({{ $user->numOfFriends }})</div>
                             <div class="grid grid-cols-3 gap-6 p-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                                 @foreach ($friends as $friend)
                                     @php
@@ -172,7 +171,7 @@
                         <div
                             class="h-106 w-full mx-auto bg-gray-100 rounded-lg shadow-md overflow-hidden dark:bg-gray-800 dark:text-gray-200">
                             <div class="flex justify-between p-6 text-2xl font-semibold">
-                                <p>About</p>
+                                <p>Acerca de:</p>
                             </div>
                             <div
                                 class="p-6 m-6 bg-blue-100 rounded-lg shadow-md overflow-hidden dark:bg-gray-700 dark:text-gray-200">
@@ -239,26 +238,7 @@
                                         <a href="{{ $user->website }}" class="pl-2">{{ $user->website }}</a>
                                     </div>
                                 @endif
-                                @if ($user->relationship)
-                                    <div class="flex mb-2">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                            </svg>
-                                        </span>
-                                        <p class="pl-2 capitalize">{{ $user->relationship }}
-                                            @if ($user->relationship != 'single')
-                                                with
-                                                <a href="{{ route('profile.show', $user->partner) }}"
-                                                    class="lowercase font-bold text-gray-600 dark:text-white">
-                                                    {{ $user->partner }}</a>
-                                            @endif
-                                        </p>
-                                    </div>
-                                @endif
+                              
                                 @if ($user->address)
                                     <div class="flex mb-2">
                                         <span>
@@ -306,7 +286,7 @@
                             <div class="relative inline-flex rounded-lg shadow-sm" role="group">
                                 <a href="{{ route('post.show', $post->uuid) }}"
                                     class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                    Read More
+                                    Leer Más
                                 </a>
                             </div>
                         </div>
@@ -325,7 +305,7 @@
                                 @if ($post->likes > 0)
                                     <span
                                         class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->likes }}</span>
-                                    <span class="text-xs text-gray-600 dark:text-gray-400">Upvotes</span>
+                                    <span class="text-xs text-gray-600 dark:text-gray-400">Me gusta</span>
                                 @endif
                             </span>
 
@@ -334,7 +314,7 @@
                                     @if ($post->comments > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->comments }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comments</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comentarios</span>
                                         <span class="text-xs font-bold text-gray-600 dark:text-white">:</span>
                                     @endif
                                 </span>
@@ -342,7 +322,7 @@
                                     @if ($post->shares > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->shares }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Shares</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Compartir</span>
                                     @endif
                                 </span>
                             </div>
@@ -410,8 +390,8 @@
         @else
             <div class="flex items-center justify-center h-32">
                 <div class="text-center">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Posts Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">No posts found. Please check back later.</p>
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No se encontraron publicaciones</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No se encontraron publicaciones. Por favor, vuelva más tarde.</p>
                 </div>
             </div>
         @endif

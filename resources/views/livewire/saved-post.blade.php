@@ -46,11 +46,11 @@
                                             {{ $post->page->name }}
                                         </a>
                                         <p class="text-xs text-gray-600 dark:text-gray-400"> {{ $post->page->members }}
-                                            follower
+                                            seguidores
                                         </p>
                                     </div>
                                 @else
-                                    <img src="{{ 'images/profiles/' . $post->user->profile }}" alt="Avatar"
+                                    <img src="{{ asset('storage/images/profiles/' . $post->user->profile) }}" alt="Avatar"
                                         class="w-12 h-12 rounded-full mr-4">
                                     <div>
                                         <a href="{{ route('profile.show', $post->user->username) }}"
@@ -70,12 +70,12 @@
                                 @if ($post->is_page_post == 1)
                                     <a
                                         href="{{ route('channel.post.show', $post->uuid) }}"class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                        Read More
+                                        Leer Más
                                     </a>
                                 @else
                                     <a href="{{ route('post.show', $post->uuid) }}"
                                         class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-l-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                        Read More
+                                        Leer Más
                                     </a>
                                 @endif
 
@@ -193,9 +193,9 @@
             <div class="flex flex-col items-center justify-center h-160">
                 <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                 <div class="text-center mt-6">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Posts Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">There is no save posts. Please check back
-                        later.
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay publicaciones guardadas</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No hay publicaciones guardadas. Por favor,
+                        vuelve más tarde.
                     </p>
                 </div>
             </div>

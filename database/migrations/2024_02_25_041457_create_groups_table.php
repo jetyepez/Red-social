@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('icon');
-            $table->string('thumbnail');
-            $table->text('description')->nullable();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('location')->nullable();
+            $table->text('description')->nullable();
             $table->string('type');
-            $table->unsignedBigInteger('members')->default(0);
-            $table->boolean('is_private')->default(0);
+            $table->string('location')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->integer('members')->default(0);
+            $table->boolean('is_private')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

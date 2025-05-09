@@ -8,101 +8,133 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class ProfileEdit extends Component
 {
-    public function render()
+    use WithFileUploads;
+
+    public $profile;
+    public $first_name;
+    public $last_name;
+    public $username;
+    public $email;
+    public $description;
+    public $school;
+    public $college;
+    public $university;
+    public $work;
+    public $address;
+    public $website;
+    public $gender;
+    public $trayecto;
+
+    public function mount(User $user)
     {
-        return view('livewire.profile-edit')->extends('layouts.app');
+        // Verificar que el usuario autenticado sea el propietario del perfil
+        if ($user->id !== Auth::id()) {
+            abort(403, 'No tienes permiso para editar este perfil.');
+        }
+
+        $this->profile = $user->profile;
+        $this->first_name = $user->first_name;
+        $this->last_name = $user->last_name;
+        $this->username = $user->username;
+        $this->email = $user->email;
+        $this->description = $user->description;
+        $this->school = $user->school;
+        $this->college = $user->college;
+        $this->university = $user->university;
+        $this->work = $user->work;
+        $this->address = $user->address;
+        $this->website = $user->website;
+        $this->gender = $user->gender;
+        $this->trayecto = $user->trayecto;
     }
 
-    public function profileEdit(Request $request)
+    public function render()
     {
-        $user = User::findOrFail(Auth::user()->id);
-        $sender = User::where('username', $request->partner)->first();
+        return view('livewire.profile-edit')
+            ->extends('layouts.app')
+            ->section('content');
+    }
+
+    public function profileEdit()
+    {
+        $this->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . Auth::id(),
+            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+            'description' => 'nullable|string|max:1000',
+            'school' => 'nullable|string|max:255',
+            'college' => 'nullable|string|max:255',
+            'university' => 'nullable|string|max:255',
+            'work' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'website' => 'nullable|url|max:255',
+            'gender' => 'required|in:male,female',
+            'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'trayecto' => 'required|in:1,2,3,4',
+        ]);
+
+        $user = User::findOrFail(Auth::id());
 
         DB::beginTransaction();
         try {
-            $this->updateUser($user, $request);
-            if ($request->relationship != 'single') {
-                $this->updateRelationship($user, $sender, $request);
-            }
+            $this->updateUser($user);
             DB::commit();
-            session()->flash('success', 'Your profile has been updated.');
+            session()->flash('success', 'Tu perfil ha sido actualizado exitosamente.');
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Hubo un error al actualizar tu perfil.');
             throw $e;
         }
 
-        $this->updateProfilePicture($user, $request);
-        $this->updateThumbnail($user, $request);
+        $this->updateProfilePicture($user);
 
-        return redirect()->route('profile.show', Auth::user()->username);
+        return redirect()->route('profile.show', $user->username);
     }
 
-    private function updateUser(User $user, Request $request)
+    private function updateUser(User $user)
     {
-        $partner = ($request->relationship == 'single') ? null : $request->partner;
-
         $user->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'description' => $request->description,
-            'school' => $request->school,
-            'college' => $request->college,
-            'university' => $request->university,
-            'relationship' => $request->relationship,
-            'partner' => $partner,
-            'work' => $request->work,
-            'address' => $request->address,
-            'website' => $request->website,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'description' => $this->description,
+            'school' => $this->school,
+            'college' => $this->college,
+            'university' => $this->university,
+            'work' => $this->work,
+            'address' => $this->address,
+            'website' => $this->website,
+            'gender' => $this->gender,
+            'trayecto' => $this->trayecto,
         ]);
     }
 
-    private function updateRelationship(User $user, User $sender, Request $request)
+    private function updateProfilePicture(User $user)
     {
-        if ($request->relationship != 'Single') {
-            if ($request->partner != $user->partner) {
-                $sender->update([
-                    'relationship' => $request->relationship,
-                    'partner' => $user->username
-                ]);
-                Notification::create([
-                    "type" =>  "Relationship Status",
-                    "user_id" => $sender->id,
-                    "message" => auth()->user()->username . " is now in a relationship with " . $request->partner,
-                    "url" => '/profile/' . $request->partner . '/edit'
-                ]);
-            }
-        }
-    }
-
-    private function updateProfilePicture(User $user, Request $request)
-    {
-        if ($request->hasFile('profile') && $request->profile->getClientOriginalName() != $user->profile) {
-            $oldProfile = public_path('storage/' . $user->profile);
-            if (file_exists($oldProfile)) {
-                unlink($oldProfile);
+        if ($this->profile && $this->profile instanceof \Illuminate\Http\UploadedFile) {
+            // Eliminar la imagen anterior si existe
+            if ($user->profile) {
+                $oldPath = storage_path('app/public/images/profiles/' . $user->profile);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
             }
 
-            $profile = time() . '.' . $request->profile->extension();
-            $path = public_path('images/profiles');
-            $request->profile->move($path, $profile);
-            $user->profile = $profile;
-            $user->save();
-        }
-    }
-
-    private function updateThumbnail(User $user, Request $request)
-    {
-        if ($request->hasFile('thumbnail')) {
-            $thumbnail = time() . '.' . $request->thumbnail->extension();
-            $path = public_path('images/profiles/thumbnails');
-            $request->thumbnail->move($path, $thumbnail);
-            $user->thumbnail = $thumbnail;
+            // Generar nombre único para la nueva imagen
+            $profileName = time() . '.' . $this->profile->getClientOriginalExtension();
+            
+            // Guardar la nueva imagen
+            $this->profile->storeAs('images/profiles', $profileName, 'public');
+            
+            // Actualizar el perfil del usuario
+            $user->profile = $profileName;
             $user->save();
         }
     }

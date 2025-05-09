@@ -1,60 +1,60 @@
 @include('Chatify::layouts.headLinks')
 
 <div class="messenger">
-    {{-- ----------------------Users/Groups lists side---------------------- --}}
+    {{-- ----------------------Lista de usuarios/grupos---------------------- --}}
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
         {{-- <div class="w-128 p-4 dark:bg-gray-800 {{ !!$id ? 'conversation-active' : '' }}"> --}}
-        {{-- Header and search bar --}}
+        {{-- Header y barra de búsqueda --}}
         <div class="m-header ">
             <nav class="flex items-center justify-between mb-4">
                 <a href="/" class="flex items-center gap-6">
                     <i class="fa-brands fa-rocketchat"></i>
                     <span>{{ config('chatify.name') }}</span>
                 </a>
-                {{-- header buttons --}}
+                {{-- botones del header --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
                     <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
             </nav>
-            {{-- Search input --}}
-            <input type="text" class="messenger-search" placeholder="Search" />
+            {{-- barra de búsqueda --}}
+            <input type="text" class="messenger-search" placeholder="Buscar" />
             {{-- Tabs --}}
             {{-- <div class="messenger-listView-tabs">
                 <a href="#" class="active-tab" data-view="users">
                     <span class="far fa-user"></span> Contacts</a>
             </div> --}}
         </div>
-        {{-- tabs and lists --}}
+        {{-- tabs y listas --}}
         <div class="m-body contacts-container">
-            {{-- Lists [Users/Group] --}}
-            {{-- ---------------- [ User Tab ] ---------------- --}}
+            {{-- listas [usuarios/grupos] --}}
+            {{-- ---------------- [ pestaña de usuarios ] ---------------- --}}
             <div class="show messenger-tab users-tab app-scroll" data-view="users">
-                {{-- Favorites --}}
+                {{-- secciones de favoritos --}}
                 <div class="favorites-section">
-                    <p class="messenger-title"><span>Favorites</span></p>
+                    <p class="messenger-title"><span>Favoritos</span></p>
                     <div class="messenger-favorites app-scroll-hidden"></div>
                 </div>
-                {{-- Saved Messages --}}
-                <p class="messenger-title"><span>Your Space</span></p>
+                {{-- secciones de mensajes guardados --}}
+                <p class="messenger-title"><span>Tu espacio</span></p>
                 {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
-                {{-- Contact --}}
-                <p class="messenger-title"><span>All Messages</span></p>
+                {{-- secciones de contactos --}}
+                <p class="messenger-title"><span>Todos los mensajes</span></p>
                 <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;">
                 </div>
             </div>
-            {{-- ---------------- [ Search Tab ] ---------------- --}}
+            {{-- ---------------- [ pestaña de búsqueda ] ---------------- --}}
             <div class="messenger-tab search-tab app-scroll" data-view="search">
                 {{-- items --}}
-                <p class="messenger-title"><span>Search</span></p>
+                <p class="messenger-title"><span>Buscar</span></p>
                 <div class="search-records">
-                    <p class="message-hint center-el"><span>Type to search..</span></p>
+                    <p class="message-hint center-el"><span>Escribe para buscar..</span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- ----------------------Messaging side---------------------- --}}
+    {{-- ----------------------Área de mensajería---------------------- --}}
     <div class="messenger-messagingView">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
@@ -76,18 +76,18 @@
             </nav> --}}
             {{-- Internet connection --}}
             <div class="internet-connection">
-                <span class="ic-connected">Connected</span>
-                <span class="ic-connecting">Connecting...</span>
-                <span class="ic-noInternet">No internet access</span>
+                <span class="ic-connected">Conectado</span>
+                <span class="ic-connecting">Conectando...</span>
+                <span class="ic-noInternet">No hay conexión a internet</span>
             </div>
         </div>
 
-        {{-- Messaging area --}}
+        {{-- Área de mensajería --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el"><span>Por favor, selecciona un chat para empezar a enviar mensajes</span></p>
             </div>
-            {{-- Typing indicator --}}
+            {{-- indicador de escritura --}}
             <div class="typing-indicator">
                 <div class="message-card typing">
                     <div class="message">
@@ -101,14 +101,14 @@
             </div>
 
         </div>
-        {{-- Send Message Form --}}
+        {{-- formulario de envío de mensaje --}}
         @include('Chatify::layouts.sendForm')
     </div>
-    {{-- ---------------------- Info side ---------------------- --}}
+    {{-- ---------------------- Área de información ---------------------- --}}
     <div class="messenger-infoView app-scroll">
-        {{-- nav actions --}}
+        {{-- acciones de navegación --}}
         <nav>
-            <p>User Details</p>
+            <p>Detalles del usuario</p>
             <a href="#"><i class="fas fa-times"></i></a>
         </nav>
         {!! view('Chatify::layouts.info')->render() !!}

@@ -43,6 +43,8 @@ class User extends Authenticatable
         'banned_at',
         'banned_to',
         'password',
+        'role',
+        'trayecto',
     ];
 
     /**
@@ -69,4 +71,49 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_members');
+    }
+
+    public function pages()
+    {
+        return $this->belongsToMany(Page::class, 'page_members');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

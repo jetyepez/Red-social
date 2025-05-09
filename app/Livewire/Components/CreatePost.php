@@ -11,6 +11,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\PostMedia;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 
 class CreatePost extends Component
 {
@@ -31,24 +32,41 @@ class CreatePost extends Component
         }
 
         $request->validate([
-            'thumbnail' => ['required', 'image', 'mimes:svg,png,jpeg,jpg,gif', 'max:5120'],
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
+            'thumbnail' => ['required', 'image', 'mimes:svg,png,jpeg,jpg,gif', 'max:5120'],
+            'documents.*' => ['nullable', 'file', 'mimes:pdf,doc,docx,ppt,pptx,txt,zip,rar', 'max:25600'],
         ]);
 
         DB::beginTransaction();
         try {
-
             $thumbnail = time() . '.' . $request->thumbnail->extension();
             $path = public_path('images/thumbnails');
+            if (!File::exists($path)) {
+                File::makeDirectory($path, 0777, true);
+            }
             $request->thumbnail->move($path, $thumbnail);
+
+            $documents = [];
+            if ($request->hasFile('documents')) {
+                foreach ($request->file('documents') as $document) {
+                    $documentName = time() . '_' . $document->getClientOriginalName();
+                    $path = public_path('documents/posts');
+                    if (!File::exists($path)) {
+                        File::makeDirectory($path, 0777, true);
+                    }
+                    $document->move($path, $documentName);
+                    $documents[] = $documentName;
+                }
+            }
 
             $post = Post::create([
                 'uuid' => Str::uuid(),
                 'user_id' => auth()->id(),
-                'content' => wrapInputWithDiv($request->content),
+                'content' => $request->content,
                 'title' => $request->title,
                 'thumbnail' => $thumbnail,
+                'documents' => !empty($documents) ? json_encode($documents) : null,
             ]);
 
             $images = [];
@@ -81,10 +99,11 @@ class CreatePost extends Component
                 }
             }
             DB::commit();
-            session()->flash('success', 'Post created successfully.');
+            session()->flash('success', 'Publicación creada correctamente.');
+            return redirect()->route('home');
         } catch (\Exception $e) {
             DB::rollback();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $e;
         }
 
@@ -94,7 +113,7 @@ class CreatePost extends Component
         unset($this->content);
         unset($this->thumbnail);
 
-        session()->flash('message', 'Post created successfully.');
+        session()->flash('message', 'Publicación creada correctamente.');
 
         return redirect()->route('create-post');
     }

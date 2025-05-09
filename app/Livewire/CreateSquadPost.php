@@ -71,16 +71,16 @@ class CreateSquadPost extends Component
             }
 
             Notification::create([
-                "type" => "New Post",
+                "type" => "Nueva Publicación",
                 "user_id" => $user->id,
-                "message" => auth()->user()->username . " created a new post in your squad",
+                "message" => auth()->user()->username . " creó una nueva publicación en tu grupo",
                 "url" => "/squad/" . $group->uuid
             ]);
-            session()->flash('success', 'Post created successfully.');
+            session()->flash('success', 'Publicación creada correctamente.');
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $e;
         }
 

@@ -34,14 +34,14 @@ class Channel extends Component
             Notification::create([
                 "type" => "Follow Channel",
                 "user_id" => $page->user_id,
-                "message" => auth()->user()->username . " followed your channel",
+                "message" => auth()->user()->username . " te siguió",
                 "url" => "/channel/" . $page->uuid
             ]);
             DB::commit();
-            session()->flash('success', 'You have successfully followed the channel');
+            session()->flash('success', 'Has seguido el canal');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->back();
@@ -57,10 +57,10 @@ class Channel extends Component
                 'members' => $page->members - 1
             ]);
             DB::commit();
-            session()->flash('success', 'You have successfully unfollowed the channel');
+            session()->flash('success', 'Has dejado de seguir el canal');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->back();
@@ -94,10 +94,10 @@ class Channel extends Component
             }
             $page->delete();
             DB::commit();
-            session()->flash('success', 'You have successfully deleted the channel');
+            session()->flash('success', 'Has eliminado el canal');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->to('/my-channels');

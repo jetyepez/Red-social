@@ -27,9 +27,9 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
-                                upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click para
+                                subir</span> o arrastra y suelta</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF
                             (MAX. 5MB)</p>
                     </div>
                     <input id="dropzone-file" type="file" class="hidden" name="thumbnail" required />
@@ -39,7 +39,7 @@
                     <div class="relative text-gray-500 focus-within:text-purple-600">
                         <input type="text" name="title" id="title"
                             class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                            placeholder="Your Post's Title" />
+                            placeholder="Título de tu publicación" />
                         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="title-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -61,7 +61,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
-                        <span class="ml-6">Upload Images</span>
+                        <span class="ml-6">Subir imágenes</span>
                     </button>
                 </div>
 
@@ -121,27 +121,16 @@
             <script>
                 tinymce.init({
                     selector: 'textarea',
-                    plugins: 'anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss ',
-                    toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ',
+                    plugins: 'autolink charmap emoticons link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist | emoticons charmap | removeformat',
                     tinycomments_mode: 'embedded',
-                    tinycomments_author: 'Author name',
-                    mergetags_list: [{
-                            value: 'First.Name',
-                            title: 'First Name'
-                        },
-                        {
-                            value: 'Email',
-                            title: 'Email'
-                        },
-                    ],
-                    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
-                        "See docs to implement AI Assistant")),
+                    tinycomments_author: 'Author name'
                 });
             </script>
             <textarea placeholder="Cover Letter" id="content" name="content"></textarea>
 
 
-            <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Post</button>
+            <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Publicar</button>
         </form>
     </div>
 </div>

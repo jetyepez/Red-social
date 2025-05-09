@@ -28,6 +28,9 @@ use App\Livewire\Squads;
 use App\Livewire\CreateSquad;
 use App\Livewire\MySquad;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ChatifyController;
 
 
 
@@ -42,7 +45,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
     Route::get('/home', Home::class)->name('home');
     Route::get('/admin', Admin::class)->name('admin');
     Route::get('/contact-admin', ContactAdmin::class)->name('contact-admin');
@@ -95,7 +97,7 @@ Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
 
     // channel
     Route::get('/create-channel', CreateChannel::class)->name('create-channel');
-    Route::post('/create-channel', [CreateChannel::class, 'createChannel'])->name('create-channel');
+    Route::post('/create-channel', [App\Http\Controllers\ChannelController::class, 'create'])->name('create-channel');
     Route::get('/channels', Channels::class)->name('channels');
     Route::get('/my-channels', MyChannels::class)->name('my-channels');
     Route::get('/channel/{page:uuid}', Channel::class)->name('channel.show');
@@ -105,7 +107,7 @@ Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
 
     // squad
     Route::get('/create-squad', CreateSquad::class)->name('create-squad');
-    Route::post('/create-squad', [CreateSquad::class, 'createSquad'])->name('create-squad');
+    Route::post('/create-squad', [App\Http\Controllers\GroupController::class, 'create'])->name('create-squad');
     Route::get('/squads', Squads::class)->name('squads');
     Route::get('/my-squads', MySquad::class)->name('my-squads');
     Route::get('/squad/{group:uuid}', Squad::class)->name('squad.show');
@@ -118,6 +120,11 @@ Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
     Route::get('/mark-as-read/{notification:id}', [Notification::class, 'markAsRead'])->name('mark-as-read');
     Route::get('/mark-all-as-read', [Notification::class, 'markAllAsRead'])->name('mark-all-as-read');
 
+    // chat
+    Route::get('/chat', function () {
+        return redirect('/envoy');
+    })->name('chat');
+
     Route::get('/delete&ban/{post:uuid}', [ShowPost::class, 'deleteAndBan'])->name('delete&ban');
     Route::get('/ban/{user:id}', [Admin::class, 'ban'])->name('admin.ban');
     Route::get('/unban/{user:id}', [Admin::class, 'unban'])->name('admin.unban');
@@ -128,7 +135,6 @@ Route::middleware(['auth', 'verified', 'VerifiedUser'])->group(function () {
         Auth::logout();
         return redirect()->route('login');
     })->name('logout');
-});
 
 // Route::get('/', Home::class)->middleware(['auth', 'verified', 'VerifiedUser']);
 // Route::get('/create-post', CreatePost::class)->middleware(['auth', 'verified', 'VerifiedUser']);
@@ -150,5 +156,33 @@ Route::get('/terms-and-conditions', function () {
 Route::get('/', function () {
     return view('welcome');
 })->middleware('check.username');
+
+// Rutas de administrador
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', Admin::class)->name('admin');
+    Route::get('/all-users', AllUsers::class)->name('all-users');
+    Route::get('/ban/{user:id}', [Admin::class, 'ban'])->name('admin.ban');
+    Route::get('/unban/{user:id}', [Admin::class, 'unban'])->name('admin.unban');
+    Route::get('/unlock/{user:id}', [Admin::class, 'unlock'])->name('admin.unlock');
+    Route::get('/delete&ban/{post:uuid}', [ShowPost::class, 'deleteAndBan'])->name('delete&ban');
+    Route::get('/admin/ban/{user}', [AdminController::class, 'ban'])->name('admin.ban');
+    Route::get('/admin/unban/{user}', [AdminController::class, 'unban'])->name('admin.unban');
+    Route::get('/admin/unlock/{user}', [AdminController::class, 'unlock'])->name('admin.unlock');
+    Route::get('/admin/change-role/{user}/{role}', [AdminController::class, 'changeRole'])->name('admin.change-role');
+});
+
+// Rutas del chat
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat/online-users', [ChatController::class, 'getOnlineUsers']);
+    Route::post('/chat/update-last-seen', [ChatController::class, 'updateLastSeen']);
+    Route::post('/chat/send', [ChatController::class, 'sendMessage']);
+    Route::get('/chat/messages/{userId}', [ChatController::class, 'getMessages']);
+});
+
+// Rutas para usuarios online
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chatify/online-users', [ChatifyController::class, 'getOnlineUsers']);
+    Route::post('/chatify/update-last-seen', [ChatifyController::class, 'updateLastSeen']);
+});
 
 require __DIR__ . '/auth.php';

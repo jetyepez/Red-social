@@ -24,16 +24,16 @@ class SavedPostController extends Component
             $post = Post::findOrFail($post_id);
 
             Notification::create([
-                "type" => "Save Post",
+                "type" => "Guardar Publicación",
                 "user_id" => $post->user_id,
-                "message" => auth()->user()->username . " saved your post",
+                "message" => auth()->user()->username . " guardó tu publicación",
                 "url" => "/post/" .  $post->uuid
             ]);
             DB::commit();
-            session()->flash('success', 'Save post successfully.');
+            session()->flash('success', 'Publicación guardada correctamente.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->back();
@@ -46,10 +46,10 @@ class SavedPostController extends Component
             $save = SavedPost::where(["post_id" => $post_id, "user_id" => auth()->id()])->first();
             $save->delete();
             DB::commit();
-            session()->flash('success', 'Unsave post successfully.');
+            session()->flash('success', 'Publicación eliminada correctamente.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->back();

@@ -33,7 +33,7 @@ $channels = \App\Models\Page::all()->where('user_id', '!=', auth()->id());
                                             </h2>
                                             @if ($channel->members > 0)
                                                 <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                    {{ $channel->members }} Followers
+                                                    {{ $channel->members }} Seguidores
                                                 </p>
                                             @endif
                                         </div>
@@ -41,11 +41,11 @@ $channels = \App\Models\Page::all()->where('user_id', '!=', auth()->id());
                                     <div class="mt-6 flex justify-between gap-6">
                                         <a href="{{ route('channel.show', $channel->uuid) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            View Channel
+                                            Ver Canal
                                         </a>
                                         <a href="{{ route('follow-channel', $channel->id) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            Follow Channel
+                                            Seguir Canal
                                         </a>
                                     </div>
                                 </div>
@@ -58,8 +58,8 @@ $channels = \App\Models\Page::all()->where('user_id', '!=', auth()->id());
             <div class="flex flex-col items-center justify-center h-160">
                 <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                 <div class="text-center mt-6 ">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Channels Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">There is no channel. Please check back later.</p>
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay canales</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No hay canales. Por favor, revisa más tarde.</p>
                 </div>
             </div>
         @endif

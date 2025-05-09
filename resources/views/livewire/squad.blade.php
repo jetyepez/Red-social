@@ -27,22 +27,22 @@
         class=" hidden absolute z-10 center-absolute w-1/3 bg-red-100 border-t-8 border-red-600 rounded-b-lg px-4 py-4 flex-col justify-around shadow-md dark:bg-white text-gray-700 dark:text-gray-700">
         <div class="flex flex-col justify-center items-center">
             <img src="{{ asset('images/website/trash_bin.gif') }}" alt="" width="100px">
-            <h2 class="text-lg font-bold mt-2 text-center">Are you sure to delete <span
+            <h2 class="text-lg font-bold mt-2 text-center">¿Estás seguro de querer eliminar <span
                     id="modal-title">{{ $squad->name }}</span> ?</h2>
-            <span class="text-sm font-bold my-4">To confirm, type "{{ $squad->name }}" in the box
-                below</span>
+            <span class="text-sm font-bold my-4">Para confirmar, escribe "{{ $squad->name }}" en el cuadro
+                debajo</span>
             <input type="text" name="checkDeleteSquadName" id="checkDeleteSquadName" onblur="checkDeleteSquadName()"
                 class="border-black bg-gray-300 block w-full mt-1 text-sm text-black focus:shadow-outline-gray form-input">
             <div class="flex justify-between gap-6 mt-2">
                 <a href="" id="deleteSquad"
                     class="bg-red-600 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button">
-                    Delete
+                    Eliminar
                 </a>
                 <button
                     class="bg-gray-600 active:bg-gray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button" onclick="closeModal()">
-                    Cancle
+                    Cancelar
                 </button>
             </div>
         </div>
@@ -81,25 +81,25 @@
                 @if ($squad->user_id == auth()->id())
                     <a href="{{ route('squad.create-post', $squad->uuid) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        New Post
+                        Nueva publicación
                     </a>
                     <button onclick="squadDelete()"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
-                        Delete Squad
+                        Eliminar equipo
                     </button>
                 @elseif($joined)
                     <a href="{{ route('squad.create-post', $squad->uuid) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        New Post
+                        Nueva Publicación
                     </a>
                     <a href="{{ route('leave-squad', $squad->id) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
-                        Leave Squad
+                        Salir del equipo
                     </a>
                 @else
                     <a href="{{ route('join-squad', $squad->id) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                        Join Squad
+                        Unirse al equipo
                     </a>
                 @endif
 
@@ -136,7 +136,7 @@
                             <div class="relative inline-flex rounded-lg shadow-sm" role="group">
                                 <a href="{{ route('squad.post.show', $post->uuid) }}"
                                     class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                    Read More
+                                    Leer Más
                                 </a>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                                 @if ($post->likes > 0)
                                     <span
                                         class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->likes }}</span>
-                                    <span class="text-xs text-gray-600 dark:text-gray-400">Upvotes</span>
+                                    <span class="text-xs text-gray-600 dark:text-gray-400">Me gusta</span>
                                 @endif
                             </span>
 
@@ -164,7 +164,7 @@
                                     @if ($post->comments > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->comments }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comments</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comentarios</span>
                                         <span class="text-xs font-bold text-gray-600 dark:text-white">:</span>
                                     @endif
                                 </span>
@@ -172,7 +172,7 @@
                                     @if ($post->shares > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->shares }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Shares</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Compartir</span>
                                     @endif
                                 </span>
                             </div>
@@ -235,14 +235,14 @@
                         </div>
                     </div>
                 @empty
-                    {{-- <h1 class="text-center text-red-600">Empty</h1> --}}
+                    {{-- <h1 class="text-center text-red-600">Vacio</h1> --}}
                 @endforelse
             </div>
         @else
             <div class="flex items-center justify-center h-56">
                 <div class="text-center">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Posts Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">No posts found. Please check back later.</p>
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No se encontraron publicaciones</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No se encontraron publicaciones. Por favor, vuelva más tarde.</p>
                 </div>
             </div>
 

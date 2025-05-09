@@ -11,7 +11,7 @@
     <div class="my-4 flex justify-evenly">
         <button
             class="follow flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-            Followed Channels
+            Canales Siguiendo
             <span class="ml-2" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                     <path fill="currentColor"
@@ -21,7 +21,7 @@
         </button>
         <button
             class="own flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-            My Own Channels
+            Mis Canales
             <span class="ml-2" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                     <path fill="currentColor"
@@ -42,7 +42,7 @@
                                 <div class="flex-shrink-0">
                                     @if ($channel->thumbnail)
                                         <img class="w-full h-32 rounded-lg"
-                                            src="{{ 'images/pages/thumbnails/' . $channel->thumbnail }}" alt="">
+                                            src="{{ asset('storage/pages/thumbnails/' . $channel->thumbnail) }}" alt="">
                                     @else
                                         <img class="w-full h-32 rounded-lg" src="https://picsum.photos/200/300"
                                             alt="">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
-                                        <img src="{{ 'images/pages/' . $channel->icon }}" alt="Avatar"
+                                        <img src="{{ asset('storage/pages/' . $channel->icon) }}" alt="Avatar"
                                             class="w-12 h-12 rounded-full mr-4">
                                         <div>
                                             <h2 class="text-sm font-bold text-gray-700 dark:text-gray-200">
@@ -58,7 +58,7 @@
                                             </h2>
                                             @if ($channel->members > 0)
                                                 <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                    {{ $channel->members }} Followers
+                                                    {{ $channel->members }} Seguidores
                                                 </p>
                                             @endif
                                         </div>
@@ -66,7 +66,7 @@
                                     <div class="mt-6 flex justify-between gap-6">
                                         <a href="{{ route('channel.show', $channel->uuid) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            View Channel
+                                            Ver Canal
                                         </a>
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@
                 <div class="flex flex-col items-center justify-center h-144">
                     <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                     <div class="text-center mt-6">
-                        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Channels Found!</h1>
-                        <p class="text-gray-500 dark:text-gray-300 mt-2">There is no channel that you followed. Please
-                            check back later.</p>
+                        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay canales que sigas!</h1>
+                        <p class="text-gray-500 dark:text-gray-300 mt-2">No hay canales que sigas. Por favor,
+                            revisa más tarde.</p>
                     </div>
                 </div>
             @endif
@@ -97,7 +97,7 @@
                                 <div class="flex-shrink-0">
                                     @if ($channel->thumbnail)
                                         <img class="w-full h-32 rounded-lg"
-                                            src="{{ 'images/pages/thumbnails/' . $channel->thumbnail }}" alt="">
+                                            src="{{ asset('storage/pages/thumbnails/' . $channel->thumbnail) }}" alt="">
                                     @else
                                         <img class="w-full h-32 rounded-lg" src="https://picsum.photos/200/300"
                                             alt="">
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
-                                        <img src="{{ 'images/pages/' . $channel->icon }}" alt="Avatar"
+                                        <img src="{{ asset('storage/pages/' . $channel->icon) }}" alt="Avatar"
                                             class="w-12 h-12 rounded-full mr-4">
                                         <div>
                                             <h2 class="text-sm font-bold text-gray-700 dark:text-gray-200">
@@ -113,7 +113,7 @@
                                             </h2>
                                             @if ($channel->members > 0)
                                                 <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                    {{ $channel->members }} Followers
+                                                    {{ $channel->members }} Seguidores
                                                 </p>
                                             @endif
                                         </div>
@@ -121,7 +121,7 @@
                                     <div class="mt-6 flex justify-between gap-6">
                                         <a href="{{ route('channel.show', $channel->uuid) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            View Channel
+                                            Ver Canal
                                         </a>
                                     </div>
                                 </div>
@@ -133,9 +133,9 @@
                 <div class="flex flex-col items-center justify-center h-144">
                     <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                     <div class="text-center mt-6">
-                        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Channels Found!</h1>
-                        <p class="text-gray-500 dark:text-gray-300 mt-2">There is no channel that you created. Please
-                            check back later.</p>
+                        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay canales que hayas creado!</h1>
+                        <p class="text-gray-500 dark:text-gray-300 mt-2">No hay canales que hayas creado. Por favor,
+                            revisa más tarde.</p>
                     </div>
                 </div>
             @endif

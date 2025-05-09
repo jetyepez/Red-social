@@ -1,57 +1,18 @@
 {{-- The whole world belongs to you. --}}
 <div class="flex flex-col items-center">
     <div class="w-3/4 max-w-md bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800 p-6 mt-2">
-        <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Create Your Own Channel</h2>
+        <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Crear tu propio canal</h2>
+        <p class="mb-4 text-center text-sm text-gray-600 dark:text-gray-400">Los canales son espacios para compartir contenido con tus seguidores. Solo tú podrás publicar contenido.</p>
+        
         <form class="flex flex-col" method="post" action="{{ route('create-channel') }}" enctype="multipart/form-data">
             @csrf
-            <div class="flex items-center justify-between w-full mb-4 gap-6">
-                <label for="dropzone-file"
-                    class="drop_area flex flex-col items-center justify-center w-1/4 h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="img_view flex flex-col items-center justify-center pt-5 pb-6 h-64 w-full">
-                        <svg class="hide w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <p class=" mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
-                                to
-                                upload</span> or drag and drop</p>
-                        <p class="text-center text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
-                    </div>
-                    <input id="dropzone-file" type="file" class="hidden" name="icon" />
-                </label>
-                {{-- error --}}
-                @error('icon')
-                    <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
-                @enderror
-                <label for="dropzone-thumbnail"
-                    class="drop_thumbnail flex flex-col items-center justify-center w-3/4 h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="thumbnail_view flex flex-col items-center justify-center pt-5 pb-6 h-64 w-full">
-                        <svg class="hide w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <p class=" hide mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
-                                to
-                                upload</span> or drag and drop</p>
-                        <p class="hide text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
-                            (MAX. 800x400px)</p>
-                    </div>
-                    <input id="dropzone-thumbnail" type="file" class="hidden" name="thumbnail" />
-                </label>
-                {{-- error --}}
-                @error('thumbnail')
-                    <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
-                @enderror
-            </div>
 
             <div class="flex justify-between gap-6">
                 <label class="w-full text-sm mt-2">
                     <div class="relative text-gray-500 focus-within:text-purple-600">
                         <input type="text" name="name" id="name"
                             class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                            placeholder="Channel Name" />
+                            placeholder="Nombre del canal" />
                         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="title-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                                 <path fill="currentColor"
@@ -64,11 +25,20 @@
                 @error('name')
                     <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                 @enderror
-                <label class="w-full text-sm mt-2">
+            </div>
+
+            <div class="flex justify-between gap-6 mt-4">
+                <label class="w-full text-sm">
                     <div class="relative text-gray-500 focus-within:text-purple-600">
-                        <input type="text" name="type" id="type"
-                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                            placeholder="Channel Type" />
+                        <select name="type" id="type"
+                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-select">
+                            <option value="">Selecciona el tipo de canal</option>
+                            <option value="educacion">Educación</option>
+                            <option value="noticias">Noticias</option>
+                            <option value="entretenimiento">Entretenimiento</option>
+                            <option value="tutoriales">Tutoriales</option>
+                            <option value="otros">Otros</option>
+                        </select>
                         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="title-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -76,7 +46,6 @@
                                     d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
                             </svg>
-
                         </div>
                     </div>
                 </label>
@@ -84,11 +53,12 @@
                 @error('type')
                     <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                 @enderror
-                <label class="w-full text-sm mt-2">
+
+                <label class="w-full text-sm">
                     <div class="relative text-gray-500 focus-within:text-purple-600">
                         <input type="text" name="location" id="location"
                             class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                            placeholder="Channel Location" />
+                            placeholder="Ubicación del canal" />
                         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="title-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -104,12 +74,12 @@
                 @enderror
             </div>
 
-            <div class="flex justify-between gap-6">
-                <label class="w-full text-sm mt-2">
+            <div class="flex justify-between gap-6 mt-4">
+                <label class="w-full text-sm">
                     <div class="relative text-gray-500 focus-within:text-purple-600">
-                        <input type="text" name="description" id="description"
-                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                            placeholder="Channel Description" />
+                        <textarea name="description" id="description" rows="3"
+                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-textarea"
+                            placeholder="Descripción del canal"></textarea>
                         <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="title-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -124,11 +94,35 @@
                     <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                 @enderror
             </div>
-            <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Create
-                Channel</button>
+
+            <div class="flex items-center justify-center w-full mb-4 mt-4">
+                <label for="dropzone-file"
+                    class="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click
+                                para subir</span> o arrastrar y soltar</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF
+                            (MAX. 800x400px)</p>
+                    </div>
+                    <input id="dropzone-file" type="file" class="hidden" name="thumbnail" />
+                </label>
+                {{-- error --}}
+                @error('thumbnail')
+                    <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Crear
+                Canal</button>
         </form>
     </div>
 </div>
+
 <script>
     let dropArea = document.querySelector('.drop_area');
     let dropFile = document.querySelector('#dropzone-file');
@@ -137,26 +131,10 @@
     dropFile.addEventListener("change", uploadImage);
 
     function uploadImage() {
-        imgView.removeAttribute('style');
         let imgLink = URL.createObjectURL(dropFile.files[0]);
         dropArea.style.backgroundImage = `url(${imgLink})`;
         dropArea.style.backgroundSize = `cover`;
         dropArea.style.backgroundRepeat = `no-repeat`;
         dropArea.style.backgroundPosition = `center`;
-    }
-
-    let dropAreaThumbnail = document.querySelector('.drop_thumbnail');
-    let dropFileThumbnail = document.querySelector('#dropzone-thumbnail');
-    let thumbnailView = document.querySelector('.thumbnail_view');
-
-    dropFileThumbnail.addEventListener("change", uploadThumbnail);
-
-    function uploadThumbnail() {
-        thumbnailView.removeAttribute('style');
-        let thumbnailLink = URL.createObjectURL(dropFileThumbnail.files[0]);
-        dropAreaThumbnail.style.backgroundImage = `url(${thumbnailLink})`;
-        dropAreaThumbnail.style.backgroundSize = `cover`;
-        dropAreaThumbnail.style.backgroundRepeat = `no-repeat`;
-        dropAreaThumbnail.style.backgroundPosition = `center`;
     }
 </script>

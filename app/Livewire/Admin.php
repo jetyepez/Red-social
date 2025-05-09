@@ -7,10 +7,33 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Notification;
 
-class Admin extends Component
+class Admin extends Home
 {
+    public $users;
+    public $posts;
+    public $channels;
+    public $squads;
+    public $banned_users;
+
+    public function mount()
+    {
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('home')->with('error', 'No tienes permisos de administrador');
+        }
+
+        // Inicializar propiedades del Home
+        $this->posts = Post::with('user')->latest()->get();
+        $this->users = User::all();
+        $this->channels = \App\Models\Page::all();
+        $this->squads = \App\Models\Group::all();
+        $this->banned_users = User::where('banned_to', '>', now('Asia/Yangon'))->get();
+    }
+
     public function render()
     {
+        if (auth()->user()->role !== 'admin') {
+            return view('livewire.home');
+        }
         return view('livewire.admin')->extends('layouts.app');
     }
 
@@ -23,7 +46,6 @@ class Admin extends Component
                 'is_banned' => 0,
                 'banned_at' => null,
                 'banned_to' => null,
-
             ]);
             Notification::create([
                 "type" => "Temporary Lock",

@@ -40,13 +40,13 @@
 </x-guest-layout> --}}
 
 @extends('layouts.guest')
-@section('title', 'Login')
-@section('content')
+@section('title', 'Restablecer contraseña')
+@section('contenido')
     <div class="flex h-screen">
         <div class="container px-6 mx-auto flex flex-col justify-center items-center">
-            <span class="text-black text-2xl font-bold mb-4">Social Network Platform for Online Communities</span>
+            <span class="text-black text-2xl font-bold mb-4">Leander</span>
             <div class="p-4 bg-gray-300 rounded-lg shadow-xl w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Password Reset</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Restablecer contraseña</h2>
                 <form class="flex flex-col" method="POST" action="{{ route('password.store') }}">
                     @csrf
 
@@ -56,7 +56,7 @@
                             <input required autofocus autocomplete="username" type="email" name="email"
                                 value="{{ old('email', $request->email) }}" id="email"
                                 class="block w-full pl-10 mt-1 text-sm text-black  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
-                                placeholder="Email" />
+                                placeholder="Correo electrónico" />
 
                             <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -73,7 +73,7 @@
                         <div class="relative text-gray-500 focus-within:text-purple-600">
                             <input type="password" name="password" id="password" required autocomplete="new-password"
                                 class="block w-full pl-10 mt-1 text-sm text-blac focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
-                                placeholder="Password" />
+                                placeholder="Contraseña" />
                             <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -106,7 +106,7 @@
                             <input type="password" name="password_confirmation" id="cpassword" required
                                 autocomplete="new-password"
                                 class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="Confirm Password" />
+                                placeholder="Confirmar contraseña" />
                             <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -136,7 +136,7 @@
 
                     <button
                         class="text-white font-bold w-auto py-2 px-4 mt-4 mx-auto rounded-md border-2 bg-black hover:bg-black "
-                        type="submit">Reset Password</button>
+                        type="submit">Restablecer contraseña</button>
                 </form>
             </div>
         </div>
@@ -160,17 +160,17 @@
 
         function cpassword_show_hide() {
             var input_box = document.getElementById("cpassword");
-            var cshow = document.getElementById("cshow");
-            var chide = document.getElementById("chide");
+            var show = document.getElementById("cshow");
+            var hide = document.getElementById("chide");
 
             if (input_box.type === "password") {
                 input_box.type = "text";
-                cshow.classList.remove("hidden");
-                chide.classList.add("hidden");
+                show.classList.remove("hidden");
+                hide.classList.add("hidden");
             } else {
                 input_box.type = "password";
-                chide.classList.remove("hidden");
-                cshow.classList.add("hidden");
+                hide.classList.remove("hidden");
+                show.classList.add("hidden");
             }
         }
     </script>

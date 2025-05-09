@@ -28,14 +28,14 @@ class Peoples extends Component
             Notification::create([
                 "type" => "Friend Request",
                 "user_id" => $id,
-                "message" => auth()->user()->username . " sent you a friend request",
+                "message" => auth()->user()->username . " te envió una solicitud de amistad",
                 "url" => "/friends"
             ]);
             DB::commit();
-            session()->flash('success', 'Friend request sent to ' . $user->username);
+            session()->flash('success', 'Solicitud de amistad enviada a ' . $user->username);
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $e;
         }
         return redirect()->back();
@@ -52,10 +52,10 @@ class Peoples extends Component
                 'friend_id' => $id,
             ])->first()->delete();
             DB::commit();
-            session()->flash('success', 'Cancle Friend request sent to ' . $user->username);
+            session()->flash('success', 'Cancelaste la solicitud de amistad a ' . $user->username);
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $e;
         }
         return redirect()->back();
@@ -77,14 +77,14 @@ class Peoples extends Component
             Notification::create([
                 "type" => "Friend Request Accepted",
                 "user_id" => $user->id,
-                "message" => auth()->user()->username . " accepted your friend request",
+                "message" => auth()->user()->username . " acepto tu solicitud de amistad",
                 "url" => "/friends"
             ]);
             DB::commit();
-            session()->flash('success', 'Accept Friend request From ' . $user->username);
+            session()->flash('success', 'Aceptaste la solicitud de amistad de ' . $user->username);
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $e;
         }
         return redirect()->back();
@@ -127,7 +127,7 @@ class Peoples extends Component
             $friendship2->delete();
         }
 
-        session()->flash('success', 'You have successfully unfriend ' . $user->username);
+        session()->flash('success', 'Has eliminado a ' . $user->username . ' de tu grupo de amigos');
         return redirect()->back();
     }
 }

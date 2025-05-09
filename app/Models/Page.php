@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'uuid',
         'user_id',
@@ -21,6 +23,11 @@ class Page extends Model
         'type',
         'members',
         'is_private',
+    ];
+
+    protected $casts = [
+        'is_private' => 'boolean',
+        'members' => 'integer',
     ];
 
     /**
@@ -41,5 +48,15 @@ class Page extends Model
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get all of the likes for the Page
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(PageLike::class);
     }
 }

@@ -28,8 +28,8 @@
             <img src="{{ asset('images/website/trash_bin.gif') }}" alt="" width="100px">
             <h2 class="text-lg font-bold mt-2 text-center">Are you sure to delete <span
                     id="modal-title">{{ $channel->name }}</span> ?</h2>
-            <span class="text-sm font-bold my-4">To confirm, type "{{ $channel->name }}" in the box
-                below</span>
+            <span class="text-sm font-bold my-4">Para confirmar, escribe "{{ $channel->name }}" en el cuadro
+                debajo</span>
             <input type="text" name="checkDeleteChannelName" id="checkDeleteChannelName"
                 onblur="checkDeleteChannelName()"
                 class="border-black bg-gray-300 block w-full mt-1 text-sm text-black focus:shadow-outline-gray form-input">
@@ -37,12 +37,12 @@
                 <a href="" id="deleteChannel"
                     class="bg-red-600 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button">
-                    Delete
+                    Eliminar
                 </a>
                 <button
                     class="bg-gray-600 active:bg-gray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button" onclick="closeModal()">
-                    Cancle
+                    Cancelar
                 </button>
             </div>
         </div>
@@ -63,15 +63,15 @@
 
                 <span class="font-semibold text-sm text-gray-600 dark:text-gray-400">
                     {{ $channel->members }} @if ($channel->members > 1)
-                        Followers
+                        Seguidores
                     @else
-                        Follower
+                        Seguidor
                     @endif |
                     {{ $posts->count() }}
                     @if ($posts->count() > 1)
-                        Posts
+                        Publicaciones
                     @else
-                        Post
+                        Publicación
                     @endif
                 </span><br />
                 <span class="font-semibold text-sm text-gray-600 dark:text-gray-400">" {{ $channel->description }}
@@ -81,21 +81,21 @@
                 @if ($channel->user_id == auth()->id())
                     <a href="{{ route('channel.create-post', $channel->uuid) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        New Post
+                        Nueva Publicación
                     </a>
                     <button onclick="channelDelete()"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
-                        Delete Channel
+                        Eliminar Canal
                     </button>
                 @elseif($followed)
                     <a href="{{ route('unfollow-channel', $channel->id) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
-                        Unfollow Channel
+                        Dejar de Seguir Canal
                     </a>
                 @else
                     <a href="{{ route('follow-channel', $channel->id) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                        Follow Channel
+                        Seguir Canal
                     </a>
                 @endif
 
@@ -122,14 +122,14 @@
                                         {{ $channel->name }}
                                     </h2>
                                     <p class="text-xs text-gray-600 dark:text-gray-400"> {{ $channel->members }}
-                                        followers
+                                        seguidores
                                     </p>
                                 </div>
                             </div>
                             <div class="relative inline-flex rounded-lg shadow-sm" role="group">
                                 <a href="{{ route('channel.post.show', $post->uuid) }}"
                                     class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                    Read More
+                                    Leer Más
                                 </a>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                 @if ($post->likes > 0)
                                     <span
                                         class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->likes }}</span>
-                                    <span class="text-xs text-gray-600 dark:text-gray-400">Upvotes</span>
+                                    <span class="text-xs text-gray-600 dark:text-gray-400">Me gusta</span>
                                 @endif
                             </span>
 
@@ -157,7 +157,7 @@
                                     @if ($post->comments > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->comments }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comments</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comentarios</span>
                                         <span class="text-xs font-bold text-gray-600 dark:text-white">:</span>
                                     @endif
                                 </span>
@@ -165,7 +165,7 @@
                                     @if ($post->shares > 0)
                                         <span
                                             class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->shares }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Shares</span>
+                                        <span class="text-xs text-gray-600 dark:text-gray-400">Compartir</span>
                                     @endif
                                 </span>
                             </div>
@@ -234,8 +234,8 @@
         @else
             <div class="flex items-center justify-center h-56">
                 <div class="text-center">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Posts Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">No posts found. Please check back later.</p>
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay publicaciones</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No hay publicaciones. Por favor, revisa más tarde.</p>
                 </div>
             </div>
 

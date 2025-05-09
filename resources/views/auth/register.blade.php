@@ -1,294 +1,135 @@
-{{-- <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.app')
 
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
-                </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout> --}}
-
-@extends('layouts.guest')
-@section('title', 'Register')
 @section('content')
-    <div class="flex h-screen">
-        <div class="container px-6 mx-auto flex justify-center items-center">
-            <div class="p-4 bg-gray-300 rounded-lg shadow-xl w-1/2">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Create a new account</h2>
-                @foreach ($errors->all() as $error)
-                    <div role="alert"
-                        class="w-full mb-2 p-2 bg-red-800 rounded-full items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex">
-                        <span class="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3">ERROR</span>
-                        <span class="font-semibold mr-2 text-left flex-auto">{{ $error }}</span>
-                    </div>
-                @endforeach
-                <form class="flex flex-col" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                    @csrf
+<div class="bg-white dark:bg-gray-800 shadow rounded-lg p-8 max-w-lg mx-auto">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">Crear Cuenta</h2>
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-6">
+        @csrf
 
-                    <label class="block mt-2 text-sm">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <div
-                                class="block w-full mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input">
-                                <input type="file" name="profile" id="profile" accept="image/*">
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block text-sm mt-2">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input required type="text" name="first_name"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="First Name" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block text-sm mt-2">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input required type="text" name="last_name"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="Last Name" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block text-sm mt-2">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input required type="text" name="username"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="Username" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block text-sm mt-2">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input type="email" name="email" id="email"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="snpoc@gmail.com" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none" id="email-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                                </svg>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label class="block mt-2 text-sm">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input type="password" name="password" id="password"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="Password" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                </svg>
-                            </div>
-                            <button type="button"
-                                class="password-toggle-icon absolute inset-y-0 right-0 flex items-center px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-r-md"
-                                onclick="password_show_hide()">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="hidden w-6 h-6" id="show">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6" id="hide">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                                </svg>
-                            </button>
-                        </div>
-                    </label>
-
-                    <label class="block mt-2 text-sm">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <input type="password" name="password_confirmation" id="cpassword"
-                                class="block w-full pl-10 mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                placeholder="Confirm Password" />
-                            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                </svg>
-                            </div>
-                            <button type="button"
-                                class="password-toggle-icon absolute inset-y-0 right-0 flex items-center px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-r-md"
-                                onclick="cpassword_show_hide()">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="hidden w-6 h-6" id="cshow">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6" id="chide">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                                </svg>
-                            </button>
-                        </div>
-                    </label>
-
-                    <div class="block mt-2 text-sm">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <div
-                                class="block w-full mt-1 text-sm text-black   focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input">
-                                <div class="flex justify-evenly">
-                                    <div class="flex items bg-transparent items-center">
-                                        <input type="radio" name="gender" id="male" value="male"
-                                            class="form-radio">
-                                        <label for="male" class="pl-2">Male</label>
-                                    </div>
-                                    <div class="flex items bg-transparent items-center">
-                                        <input type="radio" name="gender" id="female" value="female"
-                                            class="form-radio">
-                                        <label for="female" class="pl-2">Female</label>
-                                    </div>
-                                    <div class="flex items bg-transparent items-center">
-                                        <input type="radio" name="gender" id="custom" value="custom"
-                                            class="form-radio">
-                                        <label for="custom" class="pl-2">Custom</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex mt-2 text-sm">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="terms"
-                                class="text-blue-600 form-checkbox focus:border-blue-400 focus:outline-none focus:shadow-outline-purple" />
-                            <span class="ml-2">
-                                I agree to the
-                                <a href="{{ route('terms-and-conditions') }}" class="text-blue-600 font-semibold">terms
-                                    and
-                                    conditions</a>.
-                            </span>
-                        </label>
-                    </div>
-                    <button
-                        class="text-white font-bold py-2 px-4 mt-4 mx-auto rounded-md border-2 bg-black hover:bg-black "
-                        type="submit">Register</button>
-                    <span class="text-black text-sm text-center mt-4">Already have an account? <a
-                            href="{{ route('login') }}" class="text-blue-600 font-semibold">Login</a></span>
-                </form>
-            </div>
+        <!-- Nombre -->
+        <div>
+            <label for="first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+            <input id="first_name" name="first_name" type="text" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                value="{{ old('first_name') }}" />
+            @error('first_name')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
-    </div>
-    <script>
-        function password_show_hide() {
-            var input_box = document.getElementById("password");
-            var show = document.getElementById("show");
-            var hide = document.getElementById("hide");
 
-            if (input_box.type === "password") {
-                input_box.type = "text";
-                show.classList.remove("hidden");
-                hide.classList.add("hidden");
-            } else {
-                input_box.type = "password";
-                hide.classList.remove("hidden");
-                show.classList.add("hidden");
+        <!-- Apellido -->
+        <div>
+            <label for="last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apellido</label>
+            <input id="last_name" name="last_name" type="text" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                value="{{ old('last_name') }}" />
+            @error('last_name')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Usuario -->
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Usuario</label>
+            <input id="username" name="username" type="text" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                value="{{ old('username') }}" />
+            @error('username')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+            <input id="email" name="email" type="email" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                value="{{ old('email') }}" />
+            @error('email')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Género -->
+        <div>
+            <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Género</label>
+            <select id="gender" name="gender" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white">
+                <option value="">Selecciona tu género</option>
+                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Masculino</option>
+                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Femenino</option>
+            </select>
+            @error('gender')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Foto de Perfil -->
+        <div class="flex flex-col items-center">
+            <div class="mb-2">
+                <div class="h-24 w-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden border-2 border-indigo-300">
+                    <img id="profile-preview" src="#" alt="Vista previa" class="hidden h-full w-full object-cover">
+                    <span id="profile-placeholder" class="text-gray-400 text-3xl">?</span>
+                </div>
+            </div>
+            <label for="profile" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-2">Foto de Perfil (Obligatoria)</label>
+            <input type="file" name="profile" id="profile" accept="image/*" required
+                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                onchange="previewImage(this)">
+            @error('profile')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+            <input id="password" name="password" type="password" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white" />
+            @error('password')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div>
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirmar Contraseña</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white" />
+        </div>
+
+        <div>
+            <button type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                Registrarse
+            </button>
+        </div>
+        <div class="text-center">
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                ¿Ya tienes una cuenta?
+                <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Inicia sesión
+                </a>
+            </p>
+        </div>
+    </form>
+</div>
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('profile-preview');
+        const placeholder = document.getElementById('profile-placeholder');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
             }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.classList.add('hidden');
+            placeholder.classList.remove('hidden');
         }
-
-        function cpassword_show_hide() {
-            var input_box = document.getElementById("cpassword");
-            var cshow = document.getElementById("cshow");
-            var chide = document.getElementById("chide");
-
-            if (input_box.type === "password") {
-                input_box.type = "text";
-                cshow.classList.remove("hidden");
-                chide.classList.add("hidden");
-            } else {
-                input_box.type = "password";
-                chide.classList.remove("hidden");
-                cshow.classList.add("hidden");
-            }
-        }
-    </script>
-
+    }
+</script>
 @endsection

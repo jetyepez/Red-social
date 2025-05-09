@@ -1,0 +1,95 @@
+/* Variables de color */
+:root {
+    --color-primary: #6B46C1;
+    --color-secondary: #3B82F6;
+    --color-success: #10B981;
+    --color-error: #EF4444;
+    --color-warning: #F59E0B;
+    --color-light-bg: #FFFFFF;
+    --color-dark-bg: #1F2937;
+    --color-text-light: #FFFFFF;
+    --color-text-dark: #1F2937;
+}
+
+/* Tipografía */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-dark);
+    background-color: var(--color-light-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Botones */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: medium;
+    transition: background-color 0.3s ease;
+}
+
+.button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.button-primary:hover {
+    background-color: darken(var(--color-primary), 10%);
+}
+
+/* Tarjetas */
+.card {
+    background-color: var(--color-light-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+/* Formularios */
+.input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+/* Navegación */
+.navbar {
+    background-color: var(--color-light-bg);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.5rem 1rem;
+}
+
+.nav-link {
+    color: var(--color-text-dark);
+    margin-right: 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+} 

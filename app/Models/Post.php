@@ -15,6 +15,7 @@ class Post extends Model
         'title',
         'content',
         'thumbnail',
+        'documents',
         'status',
         'likes',
         'comments',
@@ -22,6 +23,10 @@ class Post extends Model
         'page_id',
         'is_group_post',
         'group_id',
+    ];
+
+    protected $casts = [
+        'documents' => 'array'
     ];
 
     /**

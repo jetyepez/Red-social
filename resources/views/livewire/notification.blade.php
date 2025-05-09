@@ -17,7 +17,7 @@
 <div class="container px-6 mx-auto grid">
 
     <div class="flex justify-between items-center mt-4">
-        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">Notifications</h1>
+        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">Notificaciones</h1>
         <div class="flex items-center justify-center gap-6">
             <button
                 class="notRead flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -29,7 +29,7 @@
                             d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
                     </svg>
                 </span>
-                Not Read @if (count($notReadNotifications) > 0)
+                Notificaciones sin leer @if (count($notReadNotifications) > 0)
                     {{ '( ' . count($notReadNotifications) . ' )' }}
                 @endif
             </button>
@@ -40,11 +40,11 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                 </svg>
-                All Notifications
+                Todas las notificaciones
             </button>
         </div>
-        <a href="{{ route('mark-all-as-read') }}" class="text-sm text-blue-500 dark:text-blue-300 hover:underline">Mark
-            all as read</a>
+        <a href="{{ route('mark-all-as-read') }}" class="text-sm text-blue-500 dark:text-blue-300 hover:underline">Marcar
+            todas como leídas</a>
     </div>
 
 
@@ -69,17 +69,17 @@
                                     {{ $notification->message }}
                                 </p>
                             </a>
-                            <a href="{{ route('mark-as-read', $notification->id) }}">Make as read</a>
+                            <a href="{{ route('mark-as-read', $notification->id) }}">Marcar como leída</a>
                         </div>
                     @endif
                 @empty
                     <div class="flex flex-col items-center justify-center h-144">
                         <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                         <div class="text-center mt-6">
-                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Notification Found!
+                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!
                             </h1>
-                            <p class="text-gray-500 dark:text-gray-300 mt-2">There is no notification. Please check back
-                                later.
+                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más
+                                tarde.
                             </p>
                         </div>
                     </div>
@@ -111,10 +111,10 @@
                     <div class="flex flex-col items-center justify-center h-144">
                         <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                         <div class="text-center mt-6">
-                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Notification Found!
+                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!
                             </h1>
-                            <p class="text-gray-500 dark:text-gray-300 mt-2">There is no notification. Please check back
-                                later.
+                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más
+                                tarde.
                             </p>
                         </div>
                     </div>

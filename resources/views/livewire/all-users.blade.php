@@ -47,20 +47,21 @@
 <div class="container px-6 mx-auto">
     <div class="w-full my-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200">All Users</h1>
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Todos los Usuarios</h1>
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3"></th>
-                        <th class="px-4 py-3">User</th>
-                        <th class="px-4 py-3">Channels</th>
-                        <th class="px-4 py-3">Squads</th>
-                        <th class="px-4 py-3">Posts</th>
-                        <th class="px-4 py-3">Comments</th>
-                        <th class="px-4 py-3">Status</th>
-                        <th class="px-4 py-3">Banned Times</th>
-                        <th class="px-4 py-3">Actions</th>
+                        <th class="px-4 py-3">Usuario</th>
+                        <th class="px-4 py-3">Canales</th>
+                        <th class="px-4 py-3">Grupos</th>
+                        <th class="px-4 py-3">Publicaciones</th>
+                        <th class="px-4 py-3">Comentarios</th>
+                        <th class="px-4 py-3">Estado</th>
+                        <th class="px-4 py-3">Bloqueado</th>
+                        <th class="px-4 py-3">Rol</th>
+                        <th class="px-4 py-3">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -125,24 +126,43 @@
                                 {{ $user->is_banned }}
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                @if (isLocked($user))
-                                    <a href="{{ route('admin.unlock', $user->id) }}"
-                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg dark:bg-green-700 dark:text-green-100">
-                                        Unlock
-                                    </a>
-                                @else
-                                    @if (isBanned($user))
-                                        <a href="{{ route('admin.unban', $user->id) }}"
+                                <span class="px-2 py-1 font-semibold leading-tight {{ $user->role === 'admin' ? 'text-purple-700 bg-purple-100' : 'text-blue-700 bg-blue-100' }} rounded-full dark:bg-gray-700 dark:text-gray-100">
+                                    {{ ucfirst($user->role) }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-xs">
+                                <div class="flex space-x-2">
+                                    @if (isLocked($user))
+                                        <a href="{{ route('admin.unlock', $user->id) }}"
                                             class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg dark:bg-green-700 dark:text-green-100">
-                                            UNBAN
+                                            Unlock
                                         </a>
                                     @else
-                                        <a href="{{ route('admin.ban', $user->id) }}"
-                                            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-lg dark:bg-red-700 dark:text-red-100">
-                                            BAN
+                                        @if (isBanned($user))
+                                            <a href="{{ route('admin.unban', $user->id) }}"
+                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg dark:bg-green-700 dark:text-green-100">
+                                                UNBAN
+                                            </a>
+                                        @else
+                                            <a href="{{ route('admin.ban', $user->id) }}"
+                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-lg dark:bg-red-700 dark:text-red-100">
+                                                BAN
+                                            </a>
+                                        @endif
+                                    @endif
+                                    
+                                    @if($user->role === 'admin')
+                                        <a href="{{ route('admin.change-role', ['user' => $user->id, 'role' => 'user']) }}"
+                                            class="px-2 py-1 font-semibold leading-tight text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-700 dark:text-blue-100">
+                                            Quitar Admin
+                                        </a>
+                                    @else
+                                        <a href="{{ route('admin.change-role', ['user' => $user->id, 'role' => 'admin']) }}"
+                                            class="px-2 py-1 font-semibold leading-tight text-purple-700 bg-purple-100 rounded-lg dark:bg-purple-700 dark:text-purple-100">
+                                            Hacer Admin
                                         </a>
                                     @endif
-                                @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

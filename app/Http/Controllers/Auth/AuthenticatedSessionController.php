@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Post;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,7 +18,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $post = Post::find(1); // Replace with the correct logic to get the post
+        return view('auth.login', compact('post'));
     }
 
     /**

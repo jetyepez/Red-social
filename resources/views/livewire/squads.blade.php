@@ -33,7 +33,7 @@ $squads = \App\Models\Group::all()->where('user_id', '!=', auth()->id());
                                             </h2>
                                             @if ($squad->members > 0)
                                                 <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                    {{ $squad->members }} members
+                                                    {{ $squad->members }} miembros
                                                 </p>
                                             @endif
                                         </div>
@@ -41,11 +41,11 @@ $squads = \App\Models\Group::all()->where('user_id', '!=', auth()->id());
                                     <div class="mt-6 flex justify-between gap-6">
                                         <a href="{{ route('squad.show', $squad->uuid) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            View Squad
+                                            Ver Grupo
                                         </a>
                                         <a href="{{ route('join-squad', $squad->id) }}"
                                             class="w-full flex items-center justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                                            Join Squad
+                                            Unirse al Grupo
                                         </a>
                                     </div>
                                 </div>
@@ -58,8 +58,8 @@ $squads = \App\Models\Group::all()->where('user_id', '!=', auth()->id());
             <div class="flex flex-col items-center justify-center h-160">
                 <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                 <div class="text-center mt-6 ">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No Squads Found</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">There is no squad. Please check back later.</p>
+                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay Grupos</h1>
+                    <p class="text-gray-500 dark:text-gray-300 mt-2">No hay grupos. Por favor, revisa más tarde.</p>
                 </div>
             </div>
         @endif

@@ -17,15 +17,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $user = User::create([
-            'uuid' => Str::uuid(),
-            'first_name' => "Laziest",
-            'last_name' => "Ant",
-            'username' => "laziestant",
-            'email' => "laziestant@gmail.com",
-            'profile' => '',
-            'gender' => "male",
-            'password' => Hash::make("password"),
-        ]);
+        // Crear usuario administrador solo si no existe
+        if (!User::where('email', 'admin@system.com')->exists()) {
+            User::create([
+                'uuid' => Str::uuid(),
+                'first_name' => 'Admin',
+                'last_name' => 'System',
+                'username' => 'snpoc_admin',
+                'email' => 'admin@system.com',
+                'password' => Hash::make('123456789'),
+                'role' => 'admin'
+            ]);
+        }
     }
 }
