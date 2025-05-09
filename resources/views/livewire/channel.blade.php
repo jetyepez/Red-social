@@ -10,20 +10,50 @@
         ->where('page_id', $channel->id)
         ->exists();
 @endphp
-<div class="container p-6 mx-auto">
-    <script>
-        function channelDelete() {
-            document.getElementById('channelDelete').classList.remove('hidden');
-            document.getElementById('channelDelete').classList.add('flex');
-        }
-
-        function closeModal() {
-            document.getElementById('channelDelete').classList.remove('flex');
-            document.getElementById('channelDelete').classList.add('hidden');
-        }
-    </script>
+<div class="container p-0 mx-auto">
+    <div class="relative w-full h-64 rounded-t-lg overflow-hidden">
+        <img src="{{ asset('images/pages/thumbnails/' . $channel->thumbnail) }}" alt="Cover photo"
+            class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end">
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="text-white">
+                        <h2 class="text-2xl font-bold">{{ $channel->name }}</h2>
+                        <div class="flex flex-wrap gap-4 mt-2 text-sm font-semibold">
+                            <span>{{ $channel->members }} @if ($channel->members == 1) Seguidor @else Seguidores @endif</span>
+                            <span>|</span>
+                            <span>{{ $posts->count() }} @if ($posts->count() == 1) Publicación @else Publicaciones @endif</span>
+                        </div>
+                        <div class="mt-2 text-gray-200 text-sm font-normal">{{ $channel->description }}</div>
+                    </div>
+                    <div class="flex gap-4 mt-4 md:mt-0">
+                        @if ($channel->user_id == auth()->id())
+                            <a href="{{ route('channel.create-post', $channel->uuid) }}"
+                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition">
+                                Nueva Publicación
+                            </a>
+                            <button onclick="channelDelete()"
+                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
+                                Eliminar Canal
+                            </button>
+                        @elseif($followed)
+                            <a href="{{ route('unfollow-channel', $channel->id) }}"
+                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
+                                Dejar de Seguir Canal
+                            </a>
+                        @else
+                            <a href="{{ route('follow-channel', $channel->id) }}"
+                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+                                Seguir Canal
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="channelDelete"
-        class=" hidden absolute z-10 center-absolute w-1/3 bg-red-100 border-t-8 border-red-600 rounded-b-lg px-4 py-4 flex-col justify-around shadow-md dark:bg-white text-gray-700 dark:text-gray-700">
+        class="hidden absolute z-10 center-absolute w-1/3 bg-red-100 border-t-8 border-red-600 rounded-b-lg px-4 py-4 flex-col justify-around shadow-md dark:bg-white text-gray-700 dark:text-gray-700">
         <div class="flex flex-col justify-center items-center">
             <img src="{{ asset('images/website/trash_bin.gif') }}" alt="" width="100px">
             <h2 class="text-lg font-bold mt-2 text-center">Are you sure to delete <span
@@ -47,63 +77,6 @@
             </div>
         </div>
     </div>
-    <div class="relative">
-        <img src="{{ asset('images/pages/thumbnails/' . $channel->thumbnail) }}" alt="Cover photo"
-            class="w-full h-48 rounded-t-lg">
-    </div>
-    <div class="bg-gray-100 p-4 rounded-lg shadow mt-4 dark:bg-gray-800 dark:text-gray-200">
-        <hr class="my-3 dark:border-gray-600" />
-        <div class="flex justify-between items-center p-4">
-            <div class="border-4 border-black bg-gray-100 rounded-full overflow-hidden dark:border-white">
-                <img src="{{ asset('images/pages/' . $channel->icon) }}" alt="Profile picture"
-                    class="w-24 h-24 object-cover">
-            </div>
-            <div class="text-center">
-                <h2 class="text-lg font-bold">{{ $channel->name }}</h2>
-
-                <span class="font-semibold text-sm text-gray-600 dark:text-gray-400">
-                    {{ $channel->members }} @if ($channel->members > 1)
-                        Seguidores
-                    @else
-                        Seguidor
-                    @endif |
-                    {{ $posts->count() }}
-                    @if ($posts->count() > 1)
-                        Publicaciones
-                    @else
-                        Publicación
-                    @endif
-                </span><br />
-                <span class="font-semibold text-sm text-gray-600 dark:text-gray-400">" {{ $channel->description }}
-                    "</span>
-            </div>
-            <div class="flex gap-6">
-                @if ($channel->user_id == auth()->id())
-                    <a href="{{ route('channel.create-post', $channel->uuid) }}"
-                        class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        Nueva Publicación
-                    </a>
-                    <button onclick="channelDelete()"
-                        class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
-                        Eliminar Canal
-                    </button>
-                @elseif($followed)
-                    <a href="{{ route('unfollow-channel', $channel->id) }}"
-                        class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
-                        Dejar de Seguir Canal
-                    </a>
-                @else
-                    <a href="{{ route('follow-channel', $channel->id) }}"
-                        class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                        Seguir Canal
-                    </a>
-                @endif
-
-            </div>
-        </div>
-        <hr class="my-3 dark:border-gray-600" />
-    </div>
-
     <section class="container my-4 px-6 mx-auto grid">
         @if ($posts->count() > 0)
             <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
@@ -115,8 +88,6 @@
                     <div class="flex flex-col p-4 bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800">
                         <div class="flex items-center justify-between">
                             <div class="flex">
-                                <img src="{{ asset('images/pages/' . $channel->icon) }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
                                 <div>
                                     <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200">
                                         {{ $channel->name }}
@@ -133,7 +104,6 @@
                                 </a>
                             </div>
                         </div>
-
                         <div class="mt-4 h-12">
                             <h2 class="text-xl font-bold text-gray-700 dark:text-gray-100">{{ $post->title }}</h2>
                         </div>
@@ -151,7 +121,6 @@
                                     <span class="text-xs text-gray-600 dark:text-gray-400">Me gusta</span>
                                 @endif
                             </span>
-
                             <div class="gap-6">
                                 <span>
                                     @if ($post->comments > 0)
@@ -198,7 +167,6 @@
                                         </svg>
                                     </a>
                                 @endif
-
                             </div>
                             <div class="flex items-center justify-center ">
                                 <a href="{{ route('post.show', $post->uuid) }}"class="flex items-center">
@@ -221,10 +189,8 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
                                     </svg>
-
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 @empty
@@ -238,11 +204,19 @@
                     <p class="text-gray-500 dark:text-gray-300 mt-2">No hay publicaciones. Por favor, revisa más tarde.</p>
                 </div>
             </div>
-
         @endif
     </section>
 </div>
 <script>
+    function channelDelete() {
+        document.getElementById('channelDelete').classList.remove('hidden');
+        document.getElementById('channelDelete').classList.add('flex');
+    }
+
+    function closeModal() {
+        document.getElementById('channelDelete').classList.remove('flex');
+        document.getElementById('channelDelete').classList.add('hidden');
+    }
     let checkInputChannel = document.getElementById('checkDeleteChannelName');
     let deleteChannelButton = document.getElementById('deleteChannel');
     let checkChannel = @json($channel->name);

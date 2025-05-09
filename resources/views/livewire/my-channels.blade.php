@@ -1,12 +1,16 @@
 {{-- The best athlete wants his opponent at his best. --}}
 @php
     $ownChannels = \App\Models\Page::all()->where('user_id', auth()->id());
-    // $followChannels = \App\Models\PageLike::all()->where('user_id', auth()->id());
     $followChannels = \App\Models\Page::join('page_likes', 'pages.id', '=', 'page_likes.page_id')
         ->where('page_likes.user_id', auth()->id())
         ->get();
     $followers_count = \App\Models\Follower::all()->count();
 @endphp
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/tailwind.output.css') }}">
+@endpush
+
 <div class="container px-6 mx-auto grid">
     <div class="my-4 flex justify-evenly">
         <button
@@ -38,7 +42,6 @@
                     @foreach ($followChannels as $channel)
                         <div class="flex flex-col p-4 bg-blue-100 rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="flex flex-col rounded-lg shadow-lg">
-
                                 <div class="flex-shrink-0">
                                     @if ($channel->thumbnail)
                                         <img class="w-full h-32 rounded-lg"
@@ -50,8 +53,6 @@
                                 </div>
                                 <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
-                                        <img src="{{ asset('storage/pages/' . $channel->icon) }}" alt="Avatar"
-                                            class="w-12 h-12 rounded-full mr-4">
                                         <div>
                                             <h2 class="text-sm font-bold text-gray-700 dark:text-gray-200">
                                                 {{ $channel->name }}
@@ -93,7 +94,6 @@
                     @foreach ($ownChannels as $channel)
                         <div class="flex flex-col p-4 bg-blue-100 rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="flex flex-col rounded-lg shadow-lg">
-
                                 <div class="flex-shrink-0">
                                     @if ($channel->thumbnail)
                                         <img class="w-full h-32 rounded-lg"
@@ -105,8 +105,6 @@
                                 </div>
                                 <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
-                                        <img src="{{ asset('storage/pages/' . $channel->icon) }}" alt="Avatar"
-                                            class="w-12 h-12 rounded-full mr-4">
                                         <div>
                                             <h2 class="text-sm font-bold text-gray-700 dark:text-gray-200">
                                                 {{ $channel->name }}

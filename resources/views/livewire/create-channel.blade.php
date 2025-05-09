@@ -1,6 +1,6 @@
 {{-- The whole world belongs to you. --}}
-<div class="flex flex-col items-center">
-    <div class="w-3/4 max-w-md bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800 p-6 mt-2">
+<div class="container px-6 mx-auto grid">
+    <div class="mt-4 p-4 rounded-lg bg-gray-100 shadow-md dark:bg-gray-700">
         <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Crear tu propio canal</h2>
         <p class="mb-4 text-center text-sm text-gray-600 dark:text-gray-400">Los canales son espacios para compartir contenido con tus seguidores. Solo tú podrás publicar contenido.</p>
         
@@ -95,23 +95,23 @@
                 @enderror
             </div>
 
-            <div class="flex items-center justify-center w-full mb-4 mt-4">
-                <label for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <div class="mt-4">
+                <!-- Foto de portada del canal -->
+                <label for="thumbnail"
+                    class="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    id="thumbnail-drop-area">
+                    <span class="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">Foto de portada del canal</span>
+                    <span class="mb-2 text-xs text-gray-500 dark:text-gray-400">Esta imagen será la cabecera grande del canal.</span>
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6" id="thumbnail-preview-container">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click
-                                para subir</span> o arrastrar y soltar</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF
-                            (MAX. 800x400px)</p>
+                        <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG o GIF (MAX. 1200x400px)</p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" name="thumbnail" />
+                    <input id="thumbnail" type="file" class="hidden" name="thumbnail" accept="image/*" onchange="previewThumbnail(this)" />
                 </label>
-                {{-- error --}}
                 @error('thumbnail')
                     <span class="text-red-500 text-xs mt-2">{{ $message }}</span>
                 @enderror
@@ -124,17 +124,64 @@
 </div>
 
 <script>
-    let dropArea = document.querySelector('.drop_area');
-    let dropFile = document.querySelector('#dropzone-file');
-    let imgView = document.querySelector('.img_view');
+    function previewThumbnail(input) {
+        const dropArea = document.getElementById('thumbnail-drop-area');
+        const previewContainer = document.getElementById('thumbnail-preview-container');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Ocultar el contenedor de preview por defecto
+                previewContainer.style.display = 'none';
+                
+                // Crear y mostrar la imagen de preview
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'w-full h-full object-cover rounded-lg';
+                dropArea.appendChild(img);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-    dropFile.addEventListener("change", uploadImage);
+    // Permitir arrastrar y soltar archivos
+    const dropArea = document.getElementById('thumbnail-drop-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
 
-    function uploadImage() {
-        let imgLink = URL.createObjectURL(dropFile.files[0]);
-        dropArea.style.backgroundImage = `url(${imgLink})`;
-        dropArea.style.backgroundSize = `cover`;
-        dropArea.style.backgroundRepeat = `no-repeat`;
-        dropArea.style.backgroundPosition = `center`;
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropArea.classList.add('border-blue-500');
+    }
+
+    function unhighlight(e) {
+        dropArea.classList.remove('border-blue-500');
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const input = dropArea.querySelector('input[type="file"]');
+        
+        input.files = files;
+        previewThumbnail(input);
     }
 </script>
