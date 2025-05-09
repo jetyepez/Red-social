@@ -1,9 +1,11 @@
-<header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800"
-    x-data="{
-        isProfileMenuOpen: false,
-        toggleProfileMenu() { this.isProfileMenuOpen = !this.isProfileMenuOpen },
-        closeProfileMenu() { this.isProfileMenuOpen = false }
-    }">
+@php
+    $notifications = App\Models\Notification::where('user_id', auth()->id())
+        ->whereNull('read_at')
+        ->orderBy('created_at', 'desc')
+        ->get();
+@endphp
+
+<header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container flex items-center justify-between h-full px-6 mx-auto">
         <!-- Logo -->
         <div class="flex items-center">
@@ -70,12 +72,69 @@
             </li>
 
             <!-- Notifications -->
-            <li class="relative">
-                <a href="{{ route('notification') }}" class="flex items-center text-gray-700 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-300">
+            <li class="relative" x-data="{ isNotificationsMenuOpen: false }">
+                <button class="flex items-center text-gray-700 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-300"
+                    @click="isNotificationsMenuOpen = !isNotificationsMenuOpen" @keydown.escape="isNotificationsMenuOpen = false"
+                    aria-label="Notifications" aria-haspopup="true">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                     </svg>
-                </a>
+                    @if($notifications && count($notifications) > 0)
+                        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                            {{ count($notifications) }}
+                        </span>
+                    @endif
+                </button>
+                <div x-show="isNotificationsMenuOpen"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     @click.away="isNotificationsMenuOpen = false"
+                     @keydown.escape="isNotificationsMenuOpen = false"
+                     class="absolute right-0 w-80 p-2 mt-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
+                     style="display: none;"
+                     aria-label="notifications-menu">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-sm font-semibold">Notificaciones</h3>
+                        @if(count($notifications) > 0)
+                            <a href="{{ route('mark-all-as-read') }}" class="text-xs text-blue-500 hover:underline">Marcar todas como leídas</a>
+                        @endif
+                    </div>
+                    <div class="max-h-96 overflow-y-auto">
+                        @forelse($notifications as $notification)
+                            @php
+                                $senderName = strtok($notification->message, ' ');
+                                $notificationFrom = App\Models\User::where('username', $senderName)->first();
+                            @endphp
+                            @if($notificationFrom !== null)
+                                <a href="{{ url($notification->url) }}" class="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md">
+                                    <img src="{{ asset('storage/images/profiles/' . $notificationFrom->profile) }}" alt="Avatar"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $notification->type }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ $notification->message }}</p>
+                                        <p class="text-xs text-gray-400 dark:text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
+                                    </div>
+                                    <a href="{{ route('mark-as-read', $notification->id) }}" class="text-xs text-blue-500 hover:underline ml-2">
+                                        Marcar como leída
+                                    </a>
+                                </a>
+                            @endif
+                        @empty
+                            <div class="text-center py-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">No hay notificaciones nuevas</p>
+                            </div>
+                        @endforelse
+                    </div>
+                    <div class="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600">
+                        <a href="{{ route('notification') }}" class="block text-center text-sm text-blue-500 hover:underline">
+                            Ver todas las notificaciones
+                        </a>
+                    </div>
+                </div>
             </li>
 
             <!-- Theme toggler -->
@@ -106,13 +165,20 @@
                         src="{{ auth()->user()->profile ? asset('storage/images/profiles/' . auth()->user()->profile) : 'https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82' }}"
                         alt="" aria-hidden="true" />
                 </button>
-                <template x-if="isProfileMenuOpen">
-                    <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-                        x-transition:leave-end="opacity-0" @click.away="closeProfileMenu"
-                        @keydown.escape="closeProfileMenu"
-                        class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
-                        aria-label="submenu">
-                        <li class="flex">
+                <div x-show="isProfileMenuOpen" 
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     @click.away="closeProfileMenu"
+                     @keydown.escape="closeProfileMenu"
+                     class="absolute right-0 w-56 p-2 mt-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
+                     style="display: none;"
+                     aria-label="submenu">
+                    <ul class="space-y-2">
+                        <li>
                             <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 href="{{ route('profile.show', auth()->user()->username) }}">
                                 <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -122,7 +188,7 @@
                                 <span>Perfil</span>
                             </a>
                         </li>
-                        <li class="flex">
+                        <li>
                             <a href="{{ route('profile-edit', auth()->user()->username) }}"
                                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
                                 <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -132,7 +198,7 @@
                                 <span>Editar Perfil</span>
                             </a>
                         </li>
-                        <li class="flex">
+                        <li>
                             <a href="{{ route('save-posts') }}"
                                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
                                 <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -142,7 +208,7 @@
                                 <span>Guardados</span>
                             </a>
                         </li>
-                        <li class="flex">
+                        <li>
                             <a href="{{ route('logout') }}"
                                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
                                 <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -153,7 +219,7 @@
                             </a>
                         </li>
                     </ul>
-                </template>
+                </div>
             </li>
         </ul>
     </div>

@@ -4,9 +4,9 @@
     $uuid = substr($path, strrpos($path, '/') + 1);
     $channel = \App\Models\Page::where('uuid', $uuid)->first();
 @endphp
-<div class="flex flex-col items-center">
+<div class="container p-6 mx-auto top-10">
 
-    <div class="w-3/4 max-w-md bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800 p-6 mt-2">
+<div class="mt-4 p-4 rounded-lg bg-gray-100 shadow-md dark:bg-gray-700">
 
         @foreach ($errors->all() as $error)
             <div class="text-red-600" role="alert">
