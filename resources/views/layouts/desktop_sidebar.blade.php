@@ -49,15 +49,12 @@
 </div>
 
 <!-- Desktop sidebar -->
-<aside class="z-20 hidden w-64 overflow-y-auto bg-gray-100 dark:bg-gray-800 md:block flex-shrink-0">
-    <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a href="{{ route('home') }}" class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200">
-            Leander
-        </a>
+<aside class="z-20 hidden w-64 overflow-y-auto bg-teal-100 dark:bg-teal-900 md:block flex-shrink-0">
+    <div class="py-4 text-teal-800 dark:text-teal-100">
  @if(auth()->user()->role === 'admin')
          <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                      href="{{ route('admin') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +65,7 @@
                     <span class="ml-4">Panel de Control</span>
                 </a>
                 @if ($postType == 'post' || $postType == 'create-post' || $postType == '' || $postType == 'home')
-                    <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                    <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
             </li>
@@ -77,7 +74,7 @@
 
         <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('home') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,17 +85,17 @@
                     <span class="ml-4">Inicio</span>
                 </a>
                 @if ($postType == 'post' || $postType == 'create-post' || $postType == '' || $postType == 'home')
-                    <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                    <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
             </li>
         </ul>
 
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-3 font-bold text-xs text-black dark:text-gray-100">Grupos</span>
+        <span class="px-3 my-3 font-bold text-xs text-teal-800 dark:text-teal-100">Grupos</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('squads') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -107,13 +104,13 @@
                     </svg>
                     <span class="ml-4">Grupos Públicos</span>
                     @if ($postType == 'squads')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1"\>
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('my-squads') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -122,13 +119,13 @@
                     </svg>
                     <span class="ml-4">Mis Grupos</span>
                     @if ($postType == 'my-squads' || $postType == 'squad')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('create-squad') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -136,17 +133,17 @@
                     </svg>
                     <span class="ml-4">Nuevo Grupo</span>
                     @if ($postType == 'create-squad')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-3 font-bold text-xs text-black dark:text-gray-100">Canales</span>
+        <span class="px-3 my-3 font-bold text-xs text-teal-800 dark:text-teal-100">Canales</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('channels') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                         <path fill="currentColor"
@@ -154,13 +151,13 @@
                     </svg>
                     <span class="ml-4">Canales Públicos</span>
                     @if ($postType == 'channels')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1" id="my_squad.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ '/my-channels' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                         <path fill="currentColor"
@@ -168,13 +165,13 @@
                     </svg>
                     <span class="ml-4">Mis Canales</span>
                     @if ($postType == 'my-channels' || $postType == 'channel')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1" id="new_squad.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('create-channel') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -182,17 +179,17 @@
                     </svg>
                     <span class="ml-4">Nuevo Canal</span>
                     @if ($postType == 'create-channel')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-6 font-bold text-xs text-black dark:text-gray-100">Comunicación</span>
+        <span class="px-3 my-6 font-bold text-xs text-teal-800 dark:text-teal-100">Comunicación</span>
         <ul>
             <li class="relative px-6 py-1" id="chatting.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ url('envoy', Auth()->user()->id) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -202,13 +199,13 @@
 
                     <span class="ml-4">Chat</span>
                     @if ($postType == 'chatting')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1" id="notifications.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('notification') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -219,18 +216,18 @@
                     <span class="mx-4">Notificaciones</span>
                     @if (count($notifications) > 0)
                         <span
-                            class="ml-4 bg-red-600 px-2 rounded-md text-white font-bold">{{ $notifications->count() }}</span>
+                            class="ml-4 bg-teal-600 px-2 rounded-md text-white font-bold">{{ $notifications->count() }}</span>
                     @endif
 
                     @if ($postType == 'notification')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1">
                 <a href="{{ route('friends') }}"
-                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                    class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -240,17 +237,17 @@
 
                     <span class="ml-4">Amigos</span>
                     @if ($postType == 'friends')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-6 font-bold text-xs text-black dark:text-gray-100">Gestionar</span>
+        <span class="px-3 my-6 font-bold text-xs text-teal-800 dark:text-teal-100">Gestionar</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('profile.show', auth()->user()->username) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -260,13 +257,13 @@
 
                     <span class="ml-4">Perfil</span>
                     @if ($postType == 'profile')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>
             </li>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
                     href="{{ route('save-posts') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -276,7 +273,7 @@
 
                     <span class="ml-4">Publicaciones Guardadas</span>
                     @if ($postType == 'save-posts')
-                        <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-500 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
                 </a>

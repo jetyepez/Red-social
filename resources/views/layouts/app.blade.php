@@ -27,14 +27,16 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @livewire('navigation-menu')
+    <div class="min-h-screen bg-gray-200 dark:bg-gray-900">
+        @livewire('navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+            <header class="bg-royal-blue shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-royal-blue">
+                    <div class="text-white">
+                        {{ $header }}
+                    </div>
                 </div>
             </header>
         @endif
@@ -46,8 +48,7 @@
                     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
                         @include('layouts.admin-desktop_sidebar')
                         <div class="flex flex-col flex-1 w-full">
-                            @include('layouts.navigation')
-                            <main class="h-full overflow-y-auto bg-blue-100 dark:bg-gray-900">
+                            <main class="h-full overflow-y-auto bg-gray-200 dark:bg-gray-900">
                                 @if (session()->has('success'))
                                     <script>
                                         setTimeout(function() {
@@ -98,8 +99,7 @@
                         @include('layouts.desktop_sidebar')
                         @include('layouts.mobile_sidebar')
                         <div class="flex flex-col flex-1 w-full">
-                            @include('layouts.navigation')
-                            <main class="h-full overflow-y-auto bg-blue-100 dark:bg-gray-900">
+                            <main class="h-full overflow-y-auto bg-gray-200 dark:bg-gray-900">
                                 @if (auth()->user()->banned_to > now('Asia/Yangon'))
                                     <div
                                         class="w-auto absolute z-10 bottom-right-5 mb-2 p-2 bg-red-800 rounded-full items-center text-red-100 leading-none lg:rounded-full flex lg:inline-flex">

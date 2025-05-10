@@ -50,7 +50,7 @@ class Admin extends Home
             Notification::create([
                 "type" => "Temporary Lock",
                 "user_id" => $user->id,
-                "message" => $user->username . " You have been Temporary Lock.",
+                "message" => $user->username . " Se te ha bloqueado temporalmente.",
                 "url" => "logout"
             ]);
         } else {
@@ -63,7 +63,7 @@ class Admin extends Home
             Notification::create([
                 "type" => "Ban User",
                 "user_id" => $user->id,
-                "message" => $user->username . " You have been banned from the platform.",
+                "message" => $user->username . " Se te ha prohibido el acceso a la plataforma.",
                 "url" => "/profile/" . $user->username
             ]);
         }

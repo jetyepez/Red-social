@@ -20,7 +20,11 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'No puedes banearte a ti mismo.');
         }
 
-        $user->update(['is_banned' => true]);
+        $user->update([
+            'is_banned' => true,
+            'banned_at' => now(),
+            'banned_to' => now()->addDays(7)
+        ]);
         return redirect()->back()->with('success', 'Usuario baneado exitosamente.');
     }
 

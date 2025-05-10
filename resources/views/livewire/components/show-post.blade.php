@@ -73,7 +73,7 @@
                 <div class="flex items-center justify-between gap-6">
                     <a href="{{ route('delete&ban', $post->uuid) }}"
                         class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
-                        Eliminar publicación y bloquear usuario
+                        Eliminar publicación
                     </a>
                 </div>
             @endif
@@ -122,7 +122,7 @@
 
 
         <hr class="mt-4 border-2" />
-        <div class="mt-4 bg-blue-100 dark:bg-gray-700 p-4 rounded-md">
+        <div class="mt-4 bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
             <h2 class="text-xl font-bold text-gray-700 dark:text-gray-100">Comentarios</h2>
 
             <div class="mt-4">

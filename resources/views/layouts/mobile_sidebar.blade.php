@@ -62,9 +62,7 @@
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a href="{{ route('home') }}" class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200">
-            Leander
-        </a>
+      
  @if(auth()->user()->role === 'admin')
    <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">

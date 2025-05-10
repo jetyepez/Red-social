@@ -1,3 +1,63 @@
+// Evento personalizado para el tema oscuro
+window.addEventListener('alpine:init', () => {
+    Alpine.store('theme', {
+        dark: localStorage.getItem('darkMode') === 'true',
+        toggle() {
+            this.dark = !this.dark;
+            localStorage.setItem('darkMode', this.dark);
+            document.documentElement.classList.toggle('dark', this.dark);
+        }
+    });
+
+    // Componente para el menú de notificaciones
+    Alpine.data('notifications', () => ({
+        open: false,
+        toggle() {
+            this.open = !this.open;
+        }
+    }));
+
+    // Componente para el menú de perfil
+    Alpine.data('profileMenu', () => ({
+        open: false,
+        toggle() {
+            this.open = !this.open;
+        }
+    }));
+});
+
+// Inicializar el tema al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    document.documentElement.classList.toggle('dark', darkMode);
+});
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('data', () => ({
+        dark: localStorage.getItem('darkMode') === 'true',
+        isSideMenuOpen: false,
+        currentSideMenuTab: null,
+        isSubHeaderOpen: false,
+        watchScreen() {
+            if (window.innerWidth <= 1024) {
+                this.isSideMenuOpen = false
+            }
+        },
+        toggleSideMenu() {
+            this.isSideMenuOpen = !this.isSideMenuOpen
+        },
+        toggleTheme() {
+            this.dark = !this.dark;
+            localStorage.setItem('darkMode', this.dark);
+            document.documentElement.classList.toggle('dark', this.dark);
+        }
+    }));
+
+    // Inicializar el tema al cargar la página
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    document.documentElement.classList.toggle('dark', darkMode);
+});
+
 function data() {
     function getThemeFromLocalStorage() {
         // if user already changed the theme, use it

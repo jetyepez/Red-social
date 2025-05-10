@@ -11,7 +11,7 @@ $squads = \App\Models\Group::all()->where('user_id', '!=', auth()->id());
                     @if (App\Models\GroupMember::where('user_id', auth()->id())->where('group_id', $squad->id)->exists())
                         @continue
                     @else
-                        <div class="flex flex-col p-4 bg-blue-100 rounded-lg shadow-xs dark:bg-gray-800">
+                        <div class="flex flex-col p-4 bg-gray-50 rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="flex flex-col rounded-lg shadow-lg">
 
                                 <div class="flex-shrink-0">
@@ -23,7 +23,7 @@ $squads = \App\Models\Group::all()->where('user_id', '!=', auth()->id());
                                             alt="">
                                     @endif
                                 </div>
-                                <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
+                                <div class="flex-1 bg-gray-50 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
                                         <img src="{{ 'images/squads/' . $squad->icon }}" alt="Avatar"
                                             class="w-12 h-12 rounded-full mr-4">

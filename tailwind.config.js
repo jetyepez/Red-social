@@ -16,6 +16,9 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'royal-blue': '#1E3A8A', // Azul rey
+            },
         },
     },
 

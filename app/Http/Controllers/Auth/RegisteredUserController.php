@@ -36,14 +36,10 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:' . User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'profile' => ['required', 'image', 'mimes:png,jpeg,jpg,gif', 'max:2048'],
+            'trayecto' => ['required', 'string', 'max:255'],
             'gender' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $profile = time() . '.' . $request->profile->extension();
-        $path = public_path('images/profiles');
-        $request->profile->move($path, $profile);
 
         $user = User::create([
             'uuid' => Str::uuid(),
@@ -51,7 +47,7 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
-            'profile' => $profile,
+            'trayecto' => $request->trayecto,
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
             'is_private' => 0,

@@ -53,43 +53,43 @@
                         @error('profile') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                     </div>
                     <div class="grid grid-cols-1 gap-4">
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <label for="first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre</label>
-                            <input type="text" wire:model.live="first_name" id="first_name" 
+                    <div class="relative text-gray-500 focus-within:text-purple-600">
+                        <label for="first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre</label>
+                        <input type="text" wire:model.live="first_name" id="first_name" 
                                 class="block w-full mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input rounded-lg"
-                                placeholder="Tu nombre" />
+                            placeholder="Tu nombre" />
                             @error('first_name') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                         </div>
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <label for="last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Apellido</label>
-                            <input type="text" wire:model.live="last_name" id="last_name" 
+                    <div class="relative text-gray-500 focus-within:text-purple-600">
+                        <label for="last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Apellido</label>
+                        <input type="text" wire:model.live="last_name" id="last_name" 
                                 class="block w-full mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input rounded-lg"
-                                placeholder="Tu apellido" />
+                            placeholder="Tu apellido" />
                             @error('last_name') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                         </div>
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Usuario</label>
-                            <input type="text" wire:model.live="username" id="username" 
+                    <div class="relative text-gray-500 focus-within:text-purple-600">
+                        <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre de Usuario</label>
+                        <input type="text" wire:model.live="username" id="username" 
                                 class="block w-full mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input rounded-lg"
-                                placeholder="Tu nombre de usuario" />
+                            placeholder="Tu nombre de usuario" />
                             @error('username') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                         </div>
-                        <div class="relative text-gray-500 focus-within:text-purple-600">
-                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                            <input type="email" wire:model.live="email" id="email" 
+                    <div class="relative text-gray-500 focus-within:text-purple-600">
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                        <input type="email" wire:model.live="email" id="email" 
                                 class="block w-full mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input rounded-lg"
-                                placeholder="Tu email" />
+                            placeholder="Tu email" />
                             @error('email') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-2">
                             <div>
-                                <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Género</label>
-                                <select wire:model.live="gender" id="gender" 
+                        <label for="gender" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Género</label>
+                        <select wire:model.live="gender" id="gender" 
                                     class="block w-full mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-select rounded-lg">
-                                    <option value="">Selecciona tu género</option>
-                                    <option value="male">Masculino</option>
-                                    <option value="female">Femenino</option>
-                                </select>
+                            <option value="">Selecciona tu género</option>
+                            <option value="male">Masculino</option>
+                            <option value="female">Femenino</option>
+                        </select>
                                 @error('gender') <span class="text-red-500 text-xs mt-2">{{ $message }}</span> @enderror
                             </div>
                             <div>
@@ -216,7 +216,7 @@
                     Guardar Cambios
                 </button>
             </div>
-  </div>
+            </div>
         </form>
     
 </div>

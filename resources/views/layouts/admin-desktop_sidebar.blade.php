@@ -50,17 +50,15 @@
 
 <!-- Desktop sidebar -->
 
-<aside class="z-20 hidden w-64 overflow-y-auto bg-gray-100 dark:bg-gray-800 md:block flex-shrink-0">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-teal-100 dark:bg-teal-900 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a href="{{ url('/') }}" class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Leander
-        </a>
+     
 
            <ul class="mt-6">
             <span class="px-3 my-6 font-bold text-xs text-black dark:text-gray-100">Administrador</span>
             <li class="relative px-6 py-1" id="home">
                 <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                    href="{{ url('/') }}">
+                    href="{{ route('admin') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
