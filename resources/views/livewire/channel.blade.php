@@ -10,222 +10,171 @@
         ->where('page_id', $channel->id)
         ->exists();
 @endphp
-<div class="container p-0 mx-auto">
-    <div class="relative w-full h-64 rounded-t-lg overflow-hidden">
-        <img src="{{ asset('images/pages/thumbnails/' . $channel->thumbnail) }}" alt="Cover photo"
-            class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end">
-            <div class="p-6">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div class="text-white">
-                        <h2 class="text-2xl font-bold">{{ $channel->name }}</h2>
-                        <div class="flex flex-wrap gap-4 mt-2 text-sm font-semibold">
-                            <span>{{ $channel->members }} @if ($channel->members == 1) Seguidor @else Seguidores @endif</span>
-                            <span>|</span>
-                            <span>{{ $posts->count() }} @if ($posts->count() == 1) Publicación @else Publicaciones @endif</span>
-                        </div>
-                        <div class="mt-2 text-gray-200 text-sm font-normal">{{ $channel->description }}</div>
+
+<style>
+    .profile-container {
+        background-color: #f9fafb;
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .profile-header {
+        position: relative;
+        padding: 2rem 0;
+    }
+    .profile-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    .stats-container {
+        gap: 3rem;
+        margin-top: 1.5rem;
+    }
+    .stats-number {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    .stats-label {
+        font-size: 0.875rem;
+    }
+    .info-text {
+        font-size: 0.875rem;
+    }
+    .post-title {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .post-meta {
+        font-size: 0.75rem;
+    }
+    .post-actions {
+        font-size: 0.875rem;
+    }
+    .posts-section {
+        padding: 2rem;
+    }
+</style>
+
+<div class="min-h-screen bg-white">
+    <div class="container mx-auto px-6">
+        <div class="bg-gray-50 rounded-lg shadow-lg border border-gray-200 profile-container">
+            <!-- Foto de Perfil y Nombre -->
+            <div class="flex flex-col items-center profile-header">
+                @if ($channel->thumbnail)
+                <img class="w-full h-80 rounded-lg"
+                    src="{{ asset('storage/pages/thumbnails/' . $channel->thumbnail) }}" alt="">
+            @else
+                <img class="w-full h-32 rounded-lg" src="https://picsum.photos/200/300"
+                    alt="">
+            @endif
+
+                <h1 class="profile-name text-gray-800 mt-8 mb-4">
+                    {{ $channel->name }}
+                </h1>
+
+                <!-- Estadísticas -->
+                <div class="flex justify-center stats-container">
+                    <div class="text-center">
+                        <span class="block stats-number text-gray-800 mb-2">{{ $channel->members }}</span>
+                        <span class="stats-label text-gray-600">Seguidores</span>
                     </div>
-                    <div class="flex gap-4 mt-4 md:mt-0">
-                        @if ($channel->user_id == auth()->id())
-                            <a href="{{ route('channel.create-post', $channel->uuid) }}"
-                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition">
-                                Nueva Publicación
-                            </a>
-                            <button onclick="channelDelete()"
-                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
-                                Eliminar Canal
-                            </button>
-                        @elseif($followed)
-                            <a href="{{ route('unfollow-channel', $channel->id) }}"
-                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
-                                Dejar de Seguir Canal
-                            </a>
-                        @else
-                            <a href="{{ route('follow-channel', $channel->id) }}"
-                                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-                                Seguir Canal
-                            </a>
-                        @endif
+                    <div class="text-center">
+                        <span class="block stats-number text-gray-800 mb-2">{{ $posts->count() }}</span>
+                        <span class="stats-label text-gray-600">Publicaciones</span>
                     </div>
                 </div>
+
+                <!-- Botón Seguir -->
+                @if (!$followed)
+                    <a href="{{ route('follow-channel', $channel->id) }}"
+                        class="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        Seguir
+                    </a>
+                @else
+                    <a href="{{ route('unfollow-channel', $channel->id) }}"
+                        class="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        Dejar de seguir
+                    </a>
+                @endif
             </div>
-        </div>
-    </div>
-    <div id="channelDelete"
-        class="hidden absolute z-10 center-absolute w-1/3 bg-red-100 border-t-8 border-red-600 rounded-b-lg px-4 py-4 flex-col justify-around shadow-md dark:bg-white text-gray-700 dark:text-gray-700">
-        <div class="flex flex-col justify-center items-center">
-            <img src="{{ asset('images/website/trash_bin.gif') }}" alt="" width="100px">
-            <h2 class="text-lg font-bold mt-2 text-center">Are you sure to delete <span
-                    id="modal-title">{{ $channel->name }}</span> ?</h2>
-            <span class="text-sm font-bold my-4">Para confirmar, escribe "{{ $channel->name }}" en el cuadro
-                debajo</span>
-            <input type="text" name="checkDeleteChannelName" id="checkDeleteChannelName"
-                onblur="checkDeleteChannelName()"
-                class="border-black bg-gray-300 block w-full mt-1 text-sm text-black focus:shadow-outline-gray form-input">
-            <div class="flex justify-between gap-6 mt-2">
-                <a href="" id="deleteChannel"
-                    class="bg-red-600 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                    type="button">
-                    Eliminar
-                </a>
-                <button
-                    class="bg-gray-600 active:bg-gray-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                    type="button" onclick="closeModal()">
-                    Cancelar
-                </button>
+            <div class="container mx-auto px-6 py-8">
+                <!-- Verifica si el usuario es el propietario del canal -->
+                @if($channel->user_id == auth()->id())
+                    <div class="text-center mb-6">
+                        <a href="{{ route('channel.create-post', $channel->uuid) }}"
+                            class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            Crear Publicación
+                        </a>
+                    </div>
+                @else
+                    <p class="text-center text-gray-500">Solo el propietario puede crear publicaciones.</p>
+                @endif
             </div>
-        </div>
-    </div>
-    <section class="container my-4 px-6 mx-auto grid">
-        @if ($posts->count() > 0)
-            <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-                <!-- Card -->
-                @forelse ($posts as $post)
-                    @php
-                        $title = $post->title;
-                    @endphp
-                    <div class="flex flex-col p-4 bg-gray-100 rounded-lg shadow-xs dark:bg-gray-800">
-                        <div class="flex items-center justify-between">
-                            <div class="flex">
-                                <div>
-                                    <h2 class="text-sm font-medium text-gray-700 dark:text-gray-200">
-                                        {{ $channel->name }}
-                                    </h2>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400"> {{ $channel->members }}
-                                        seguidores
-                                    </p>
+
+            <!-- Publicaciones -->
+            <div class="posts-section">
+                <h2 class="section-title text-gray-800 mb-8">Publicaciones</h2>
+                @if ($posts->count() > 0)
+                    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 post-grid">
+                        @foreach ($posts as $post)
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="p-6">
+                                    <div class="flex items-center mb-4">
+                                       
+                                        <div>
+                                            <h3 class="post-title text-gray-800">
+                                                {{ $channel->name }}
+                                            </h3>
+                                            <p class="text-sm text-gray-600">{{ $channel->members }} seguidores</p>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="post-title text-gray-800 mb-4">{{ $post->title }}</h4>
+
+                                    <img src="{{ asset('images/thumbnails/' . $post->thumbnail) }}"
+                                        alt="Post Image"
+                                        class="w-full h-48 object-cover rounded-lg mb-4">
+
+                                    <div class="flex justify-between items-center text-sm text-gray-600">
+                                        <span>{{ $post->created_at->diffForHumans() }}</span>
+                                        <div class="flex space-x-4">
+                                            @if ($post->likes > 0)
+                                                <span>{{ $post->likes }} Me gusta</span>
+                                            @endif
+                                            @if ($post->comments > 0)
+                                                <span>{{ $post->comments }} Comentarios</span>
+                                            @endif
+                                            @if ($post->shares > 0)
+                                                <span>{{ $post->shares }} Compartidos</span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 flex justify-between border-t pt-4">
+                                        <a href="{{ route('channel.post.show', $post->uuid) }}"
+                                            class="flex items-center post-actions text-gray-500 hover:text-blue-500 px-3 py-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                            </svg>
+                                            Comentar
+                                        </a>
+                                        <a href="{{ route('share-post', $post->id) }}"
+                                            class="flex items-center post-actions text-gray-500 hover:text-blue-500 px-3 py-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                            </svg>
+                                            Compartir
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="relative inline-flex rounded-lg shadow-sm" role="group">
-                                <a href="{{ route('channel.post.show', $post->uuid) }}"
-                                    class="px-2 py-1 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                    Leer Más
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mt-4 h-12">
-                            <h2 class="text-xl font-bold text-gray-700 dark:text-gray-100">{{ $post->title }}</h2>
-                        </div>
-                        <div class="mt-4">
-                            <span
-                                class="text-sm text-gray-600 dark:text-gray-400">{{ $post->created_at->diffForHumans() }}</span>
-                            <img src="{{ asset('images/thumbnails/' . $post->thumbnail) }}" alt="Post Image"
-                                class="text-center rounded-lg" width="100%" height="200px">
-                        </div>
-                        <div class="mt-4 flex justify-between h-6">
-                            <span>
-                                @if ($post->likes > 0)
-                                    <span
-                                        class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->likes }}</span>
-                                    <span class="text-xs text-gray-600 dark:text-gray-400">Me gusta</span>
-                                @endif
-                            </span>
-                            <div class="gap-6">
-                                <span>
-                                    @if ($post->comments > 0)
-                                        <span
-                                            class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->comments }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Comentarios</span>
-                                        <span class="text-xs font-bold text-gray-600 dark:text-white">:</span>
-                                    @endif
-                                </span>
-                                <span>
-                                    @if ($post->shares > 0)
-                                        <span
-                                            class="text-xs text-gray-700 dark:text-gray-100 font-bold">{{ $post->shares }}</span>
-                                        <span class="text-xs text-gray-600 dark:text-gray-400">Compartir</span>
-                                    @endif
-                                </span>
-                            </div>
-                        </div>
-                        <hr class="mt-2" />
-                        <div class="px-4 mt-4 flex justify-between">
-                            <div class="flex items-center justify-center ">
-                                @php
-                                    $like = App\Models\Like::where([
-                                        'post_id' => $post->id,
-                                        'user_id' => auth()->id(),
-                                    ])->exists();
-                                @endphp
-                                @if ($like)
-                                    <a href="{{ route('post.dislike', $post->id, 'dislike') }}"
-                                        class=" hover:bg-gray-800 text-gray-700 dark:text-gray-100 font-medium py-2 rounded">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                    </a>
-                                @else
-                                    <a href="{{ route('post.like', $post->id, 'like') }}"
-                                        class=" hover:bg-gray-800 text-gray-700 dark:text-gray-100 font-medium py-2 rounded">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                    </a>
-                                @endif
-                            </div>
-                            <div class="flex items-center justify-center ">
-                                <a href="{{ route('post.show', $post->uuid) }}"class="flex items-center">
-                                    <button
-                                        class="hover:bg-gray-800 text-gray-700 dark:text-gray-100 font-medium py-2 rounded"
-                                        disabled>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                                        </svg>
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="flex items-center justify-center ">
-                                <a href="{{ route('share-post', $post->id) }}"
-                                    class="hover:bg-gray-800 text-gray-700 dark:text-gray-100 font-medium py-2 rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                @empty
-                    {{-- <h1 class="text-center text-red-600">Empty</h1> --}}
-                @endforelse
+                @else
+                    <p class="text-gray-600 text-center">No hay publicaciones aún</p>
+                @endif
             </div>
-        @else
-            <div class="flex items-center justify-center h-56">
-                <div class="text-center">
-                    <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay publicaciones</h1>
-                    <p class="text-gray-500 dark:text-gray-300 mt-2">No hay publicaciones. Por favor, revisa más tarde.</p>
-                </div>
-            </div>
-        @endif
-    </section>
+        </div>
+    </div>
 </div>
-<script>
-    function channelDelete() {
-        document.getElementById('channelDelete').classList.remove('hidden');
-        document.getElementById('channelDelete').classList.add('flex');
-    }
-
-    function closeModal() {
-        document.getElementById('channelDelete').classList.remove('flex');
-        document.getElementById('channelDelete').classList.add('hidden');
-    }
-    let checkInputChannel = document.getElementById('checkDeleteChannelName');
-    let deleteChannelButton = document.getElementById('deleteChannel');
-    let checkChannel = @json($channel->name);
-
-    function checkDeleteChannelName() {
-        if (checkInputChannel.value === checkChannel) {
-            deleteChannelButton.href = "{{ route('delete-channel', $channel->id) }}";
-        } else {
-            deleteChannelButton.href = "";
-        }
-    }
-</script>

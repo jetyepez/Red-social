@@ -1,0 +1,63 @@
+/* Estilo Completo */
+.friends-container {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    padding: 40px;
+    background-color: #f3f4f6;
+}
+.friend-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.friend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.friend-user {
+    display: flex;
+    align-items: center;
+}
+.friend-actions {
+    display: flex;
+    gap: 10px;
+}
+.friend-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.friend-stats {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+.friend-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+.friend-interactions {
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilo Pequeño */
+.main-container {
+    background-color: #f3f4f6;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 1rem;
+} 

@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="flex-1 bg-blue-100 p-6 flex flex-col justify-between dark:bg-gray-800">
                                     <div class="flex flex-1">
-                                        <img src="{{ asset('storage/squads/' . $squad->icon) }}" alt="Avatar"
+                                         <img src="{{ asset('storage/squads/' . $squad->icon) }}" alt="Avatar"
                                             class="w-12 h-12 rounded-full mr-4">
                                         <div>
                                             <h2 class="text-sm font-bold text-gray-700 dark:text-gray-200">

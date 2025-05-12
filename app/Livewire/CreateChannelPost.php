@@ -33,7 +33,6 @@ class CreateChannelPost extends Component
 
         DB::beginTransaction();
         try {
-
             $thumbnail = time() . '.' . $request->thumbnail->extension();
             $path = public_path('images/thumbnails');
             $request->thumbnail->move($path, $thumbnail);
@@ -71,11 +70,8 @@ class CreateChannelPost extends Component
             throw $e;
         }
 
-
-
-        unset($this->title);
-        unset($this->content);
-        unset($this->thumbnail);
-        return redirect()->back();
+        // Obtener el canal para redirigir a su perfil
+        $channel = \App\Models\Page::find($request->page_id);
+        return redirect()->route('channel.show', $channel->uuid);
     }
 }

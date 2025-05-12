@@ -103,6 +103,7 @@ use App\Http\Controllers\ChatifyController;
     Route::get('/channel/{page:uuid}', Channel::class)->name('channel.show');
     Route::get('/follow-channel/{page:id}', [Channel::class, 'followChannel'])->name('follow-channel');
     Route::get('/unfollow-channel/{page:id}', [Channel::class, 'unfollowChannel'])->name('unfollow-channel');
+
     Route::get('/delete-channel/{page:id}', [Channel::class, 'deleteChannel'])->name('delete-channel');
 
     // squad
@@ -165,9 +166,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/unban/{user:id}', [Admin::class, 'unban'])->name('admin.unban');
     Route::get('/unlock/{user:id}', [Admin::class, 'unlock'])->name('admin.unlock');
     Route::get('/delete&ban/{post:uuid}', [ShowPost::class, 'deleteAndBan'])->name('delete&ban');
-    Route::get('/admin/ban/{user}', [AdminController::class, 'ban'])->name('admin.ban');
-    Route::get('/admin/unban/{user}', [AdminController::class, 'unban'])->name('admin.unban');
-    Route::get('/admin/unlock/{user}', [AdminController::class, 'unlock'])->name('admin.unlock');
     Route::get('/admin/change-role/{user}/{role}', [AdminController::class, 'changeRole'])->name('admin.change-role');
 });
 

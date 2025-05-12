@@ -22,7 +22,7 @@ class Home extends Component
             Notification::create([
                 "type" => "Like Post",
                 "user_id" => $post->user_id,
-                "message" => auth()->user()->username . " liked your post",
+                "message" => auth()->user()->username . " le gusta tu publicación",
                 "url" => "/post/" . $post->uuid
             ]);
             DB::commit();
@@ -66,14 +66,14 @@ class Home extends Component
             Notification::create([
                 "type" => "Share Post",
                 "user_id" => $post->user_id,
-                "message" => auth()->user()->username . " shared your post",
+                "message" => auth()->user()->username . " compartió tu publicación",
                 "url" => "/post/" . $post->uuid
             ]);
             DB::commit();
-            session()->flash('success', 'You have successfully shared the post');
+            session()->flash('success', 'Has compartido la publicación correctamente');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', 'Algo salió mal');
             throw $th;
         }
         return redirect()->back();

@@ -16,6 +16,7 @@
 
         <form class="flex flex-col" method="POST" action="{{ route('channel.createpost', $uuid) }}"
             enctype="multipart/form-data">
+            <h2 class="text-xl font-bold text-gray-700 dark:text-gray-100">Crear Publicación</h2>
             @csrf
             <input type="text" name="page_id" id="" value="{{ $channel->id }}" hidden>
             <div class="flex flex-col items-center justify-center w-full  mb-4">
@@ -53,16 +54,7 @@
             </div>
             <div class="flex flex-col  w-full  mb-4">
                 <div class="flex items-center justify-evenly mb-2">
-                    <button
-                        class="img_btn flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple"
-                        type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                        </svg>
-                        <span class="ml-6">Subir imágenes</span>
-                    </button>
+
                 </div>
 
                 <style>
@@ -105,9 +97,8 @@
                                     stroke-width="2"
                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                             </svg>
-                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
-                                    to
-                                    upload</span> or drag and drop</p>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click para
+                                subir</span> o arrastra y suelta</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
                                 (MAX. 5MB)</p>
                         </div>
@@ -127,7 +118,7 @@
                     tinycomments_author: 'Author name'
                 });
             </script>
-            <textarea placeholder="Cover Letter" id="content" name="content"></textarea>
+            <textarea placeholder="Contenido de tu publicación" id="content" name="content"></textarea>
 
 
             <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Publicar</button>

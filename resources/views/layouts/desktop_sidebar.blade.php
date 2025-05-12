@@ -50,11 +50,11 @@
 
 <!-- Desktop sidebar -->
 <aside class="z-20 hidden w-64 overflow-y-auto bg-teal-100 dark:bg-teal-900 md:block flex-shrink-0">
-    <div class="py-4 text-teal-800 dark:text-teal-100">
+    <div class="py-4 text-gray-500 dark:text-gray-400">
  @if(auth()->user()->role === 'admin')
          <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                      href="{{ route('admin') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,7 +74,7 @@
 
         <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('home') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,10 +92,10 @@
         </ul>
 
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-3 font-bold text-xs text-teal-800 dark:text-teal-100">Grupos</span>
+        <span class="px-3 my-3 font-bold text-xs text-gray-600 dark:text-gray-300">Grupos</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('squads') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -110,7 +110,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1"\>
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('my-squads') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -125,7 +125,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('create-squad') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -140,10 +140,10 @@
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-3 font-bold text-xs text-teal-800 dark:text-teal-100">Canales</span>
+        <span class="px-3 my-3 font-bold text-xs text-gray-600 dark:text-gray-300">Canales</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('channels') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                         <path fill="currentColor"
@@ -157,7 +157,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1" id="my_squad.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ '/my-channels' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-6 h-6">
                         <path fill="currentColor"
@@ -171,7 +171,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1" id="new_squad.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('create-channel') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -186,10 +186,10 @@
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-6 font-bold text-xs text-teal-800 dark:text-teal-100">Comunicación</span>
+        <span class="px-3 my-6 font-bold text-xs text-gray-600 dark:text-gray-300">Comunicación</span>
         <ul>
             <li class="relative px-6 py-1" id="chatting.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ url('envoy', Auth()->user()->id) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -205,7 +205,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1" id="notifications.html">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('notification') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -227,7 +227,7 @@
             </li>
             <li class="relative px-6 py-1">
                 <a href="{{ route('friends') }}"
-                    class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100">
+                    class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -244,10 +244,10 @@
             </li>
         </ul>
         <!-- <hr class="my-3 dark:border-gray-600" /> -->
-        <span class="px-3 my-6 font-bold text-xs text-teal-800 dark:text-teal-100">Gestionar</span>
+        <span class="px-3 my-6 font-bold text-xs text-gray-600 dark:text-gray-300">Gestionar</span>
         <ul>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('profile.show', auth()->user()->username) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -263,7 +263,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-1">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-teal-800 transition-colors duration-150 hover:text-teal-600 dark:hover:text-teal-200 dark:text-teal-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-600 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-300"
                     href="{{ route('save-posts') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

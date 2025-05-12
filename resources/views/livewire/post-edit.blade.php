@@ -116,7 +116,7 @@
                     tinycomments_author: 'Author name'
                 });
             </script>
-            <textarea placeholder="Cover Letter" id="content" name="content">{{ $post->content }}</textarea>
+            <textarea placeholder="Contenido de tu publicación" id="content" name="content">{{ $post->content }}</textarea>
             <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4" type="submit">Publicar</button>
         </form>
     </div>

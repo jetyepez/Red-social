@@ -1,6 +1,5 @@
 {{-- The whole world belongs to you. --}}
 @php
-
     $notReadNotifications = App\Models\Notification::where('user_id', auth()->id())
         ->where('read_at', null)
         ->orderBy('created_at', 'desc')
@@ -12,43 +11,44 @@
         ->orderBy('created_at', 'desc')
         ->limit(50)
         ->get();
-
 @endphp
+
+<style>
+    .main-container {
+        background-color: #f3f4f6;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+</style>
+
 <div class="container px-6 mx-auto grid">
-
-    <div class="flex justify-between items-center mt-4">
-        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">Notificaciones</h1>
-        <div class="flex items-center justify-center gap-6">
-            <button
-                class="notRead flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-
+    <div class="flex flex-col items-center mt-4">
+        <div class="flex items-center justify-center gap-6 mb-4">
+            <button class="notRead flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
                 <span class="ml-2" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
                     </svg>
                 </span>
                 Notificaciones sin leer @if (count($notReadNotifications) > 0)
                     {{ '( ' . count($notReadNotifications) . ' )' }}
                 @endif
             </button>
-            <button
-                class="read flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            <button class="read flex items-center justify-between w-64 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                 </svg>
                 Todas las notificaciones
             </button>
         </div>
-        <a href="{{ route('mark-all-as-read') }}" class="text-sm text-blue-500 dark:text-blue-300 hover:underline">Marcar
-            todas como leídas</a>
+        <a href="{{ route('mark-all-as-read') }}" class="text-sm text-blue-500 dark:text-blue-300 hover:underline">Marcar todas como leídas</a>
     </div>
 
-
-    <div class="mt-4 p-4 rounded-lg bg-gray-100 shadow-md dark:bg-gray-700">
+    <div class="main-container">
+        <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-6">Notificaciones</h1>
         <div class="flex justify-center">
             <div class="notRead_section mt-2 w-3/4 h-[600px] overflow-y-auto">
                 @forelse ($notReadNotifications as $notification)
@@ -57,14 +57,11 @@
                         $notificationFrom = App\Models\User::where('username', $senderName)->first();
                     @endphp
                     @if ($notificationFrom !== null)
-                        <div
-                            class="w-full flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
+                        <div class="w-full flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
                             <a href="{{ url($notification->url) }}" class="flex items-center w-2/3">
-                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
+                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar" class="w-12 h-12 rounded-full mr-4">
                                 <p class="text-sm text-black dark:text-white">
-                                    <span
-                                        class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>
+                                    <span class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>
                                     <br />
                                     {{ $notification->message }}
                                 </p>
@@ -76,11 +73,8 @@
                     <div class="flex flex-col items-center justify-center h-[600px]">
                         <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                         <div class="text-center mt-6">
-                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!
-                            </h1>
-                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más
-                                tarde.
-                            </p>
+                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!</h1>
+                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más tarde.</p>
                         </div>
                     </div>
                 @endforelse
@@ -92,14 +86,11 @@
                         $notificationFrom = App\Models\User::where('username', $senderName)->first();
                     @endphp
                     @if ($notificationFrom !== null)
-                        <a class="w-full mx-auto flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-                            href="{{ url($notification->url) }}">
+                        <a class="w-full mx-auto flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple" href="{{ url($notification->url) }}">
                             <div class="flex items-center">
-                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar"
-                                    class="w-12 h-12 rounded-full mr-4">
+                                <img src="{{ 'images/profiles/' . $notificationFrom->profile }}" alt="Avatar" class="w-12 h-12 rounded-full mr-4">
                                 <p class="text-sm text-black dark:text-white">
-                                    <span
-                                        class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>
+                                    <span class="text-lg font-bold text-black dark:text-white">{{ $notification->type }}</span>
                                     <br />
                                     {{ $notification->message }}
                                 </p>
@@ -111,11 +102,8 @@
                     <div class="flex flex-col items-center justify-center h-[600px]">
                         <img src="{{ asset('images/website/zoom.gif') }}" alt="" width="150px">
                         <div class="text-center mt-6">
-                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!
-                            </h1>
-                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más
-                                tarde.
-                            </p>
+                            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No hay notificaciones!</h1>
+                            <p class="text-gray-500 dark:text-gray-300 mt-2">No hay notificaciones. Por favor, revisa más tarde.</p>
                         </div>
                     </div>
                 @endforelse

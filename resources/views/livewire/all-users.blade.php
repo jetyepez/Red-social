@@ -71,13 +71,7 @@
                             </td>
                             <td class="px-2 py-2">
                                 <div class="flex items-center text-xs">
-                                    <div class="relative hidden w-6 h-6 mr-2 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="{{ asset('images/profiles/' . $user->profile) }}" alt=""
-                                            loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
-                                        </div>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-semibold">{{ $user->first_name . ' ' . $user->last_name }}
                                         </p>
@@ -123,7 +117,7 @@
                                     @if (isLocked($user))
                                         <a href="{{ route('admin.unlock', $user->id) }}"
                                             class="px-2 py-1 text-sm font-semibold leading-tight text-green-700 bg-green-100 rounded-lg dark:bg-green-700 dark:text-green-100">
-                                            Unlock
+                                            Desbloquear
                                         </a>
                                     @else
                                         @if (isBanned($user))
@@ -138,7 +132,7 @@
                                             </a>
                                         @endif
                                     @endif
-                                    
+
                                     @if($user->role === 'admin')
                                         <a href="{{ route('admin.change-role', ['user' => $user->id, 'role' => 'user']) }}"
                                             class="px-2 py-1 text-sm font-semibold leading-tight text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-700 dark:text-blue-100">

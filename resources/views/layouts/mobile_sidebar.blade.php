@@ -62,7 +62,7 @@
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-      
+
  @if(auth()->user()->role === 'admin')
    <ul class="mt-6">
             <li class="relative px-6 py-1" id="home">

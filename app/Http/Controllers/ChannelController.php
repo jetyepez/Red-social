@@ -25,7 +25,7 @@ class ChannelController extends Controller
         try {
             // Crear directorio si no existe
             $thumbnailPath = 'pages/thumbnails';
-            
+
             if (!Storage::disk('public')->exists($thumbnailPath)) {
                 Storage::disk('public')->makeDirectory($thumbnailPath);
             }
@@ -51,6 +51,8 @@ class ChannelController extends Controller
                 'can_members_post' => false, // Solo el creador puede publicar
             ]);
 
+
+
             // Crear el registro del creador como administrador
             PageMember::create([
                 'page_id' => $page->id,
@@ -70,4 +72,32 @@ class ChannelController extends Controller
             return back()->with('error', 'Error al crear el canal: ' . $e->getMessage())->withInput();
         }
     }
-} 
+    public function unfollow($channelId)
+    {
+        $channel = Page::findOrFail($channelId); // Buscar el canal por ID
+
+        // Verificar si el usuario ya sigue el canal
+        $followed = DB::table('page_likes') // Usamos la tabla page_likes para verificar el seguimiento
+            ->where('user_id', auth()->id())
+            ->where('page_id', $channel->id)
+            ->first();
+
+        if ($followed)
+        {
+            // Si el usuario sigue el canal, eliminar el registro de seguimiento
+            DB::table('page_likes')
+                ->where('user_id', auth()->id())
+                ->where('page_id', $channel->id)
+                ->delete();
+
+            // Actualizar el número de seguidores en el canal
+            $channel->decrement('members'); // Restamos un seguidor
+
+            return redirect()->route('channel.show', $channel->id)
+                ->with('success', 'Has dejado de seguir este canal.');
+        }
+
+        return redirect()->route('channel.show', $channel->id)
+            ->with('info', 'No estabas siguiendo este canal.');
+    }
+}

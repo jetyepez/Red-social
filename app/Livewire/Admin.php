@@ -43,7 +43,6 @@ class Admin extends Home
         if ($user->is_banned >= 3) {
             $user->update([
                 'is_private' => 1,
-                'is_banned' => 0,
                 'banned_at' => null,
                 'banned_to' => null,
             ]);
@@ -67,15 +66,28 @@ class Admin extends Home
                 "url" => "/profile/" . $user->username
             ]);
         }
+        $this->banned_users = User::where('banned_to', '>', now('Asia/Yangon'))->get();
         return redirect()->route('all-users');
     }
 
     public function unban($userid)
     {
         $user = User::findOrFail($userid);
-        $user->update([
-            'banned_to' => now('Asia/Yangon'),
+        
+        // Limpiar el estado de baneo
+        $user->banned_at = null;
+        $user->banned_to = null;
+        $user->is_private = 0;
+        $user->save();
+        
+        Notification::create([
+            "type" => "Unban User",
+            "user_id" => $user->id,
+            "message" => $user->username . " Tu baneo ha sido removido.",
+            "url" => "/profile/" . $user->username
         ]);
+
+        $this->banned_users = User::where('banned_to', '>', now('Asia/Yangon'))->get();
         return redirect()->route('all-users');
     }
 
@@ -84,7 +96,18 @@ class Admin extends Home
         $user = User::findOrFail($userid);
         $user->update([
             'is_private' => 0,
+            'banned_at' => null,
+            'banned_to' => null
         ]);
+        
+        Notification::create([
+            "type" => "Unlock Account",
+            "user_id" => $user->id,
+            "message" => $user->username . " Tu cuenta ha sido desbloqueada.",
+            "url" => "/profile/" . $user->username
+        ]);
+
+        $this->banned_users = User::where('banned_to', '>', now('Asia/Yangon'))->get();
         return redirect()->route('all-users');
     }
 }

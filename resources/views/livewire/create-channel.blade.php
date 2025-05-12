@@ -1,11 +1,38 @@
 {{-- The whole world belongs to you. --}}
-<div class="container px-6 mx-auto grid">
-    <div class="mt-4 p-4 rounded-lg bg-gray-100 shadow-md dark:bg-gray-700">
+{{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
+@php
+    $path = parse_url(url()->current())['path'];
+    $uuid = substr($path, strrpos($path, '/') + 1);
+    $channel = \App\Models\Page::where('uuid', $uuid)->first();
+@endphp
+
+<style>
+   .main-container {
+        background-color: #f3f4f6;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="container p-6 mx-auto top-10">
+    <div class="main-container">
+        @foreach ($errors->all() as $error)
+            <div class="text-red-600" role="alert">
+                {{ $error }}
+            </div>
+        @endforeach
+
         <h2 class="mb-2 text-center text-2xl font-bold text-gray-700 dark:text-gray-200">Crear tu propio canal</h2>
         <p class="mb-4 text-center text-sm text-gray-600 dark:text-gray-400">Los canales son espacios para compartir contenido con tus seguidores. Solo tú podrás publicar contenido.</p>
         
         <form class="flex flex-col" method="post" action="{{ route('create-channel') }}" enctype="multipart/form-data">
             @csrf
+            @if($channel)
+                <input type="text" name="page_id" id="" value="{{ $channel->id }}" hidden>
+            @endif
 
             <div class="flex justify-between gap-6">
                 <label class="w-full text-sm mt-2">
