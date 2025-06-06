@@ -1,0 +1,1 @@
+function n(){fetch("/chatify/update-last-seen",{method:"POST",headers:{"Content-Type":"application/json","X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').content}})}setInterval(n,6e4);async function s(){const t=await(await fetch("/chatify/online-users")).json(),e=document.querySelector("[x-data]").__x;e&&(e.onlineUsers=t)}setInterval(s,3e4);

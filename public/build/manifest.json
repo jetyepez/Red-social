@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Pe1urZhU.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-9mbrzSRH.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/chatify-widget.js": {
+    "file": "assets/chatify-widget-Cx--QLMc.js",
+    "src": "resources/js/chatify-widget.js",
+    "isEntry": true
+  }
+}
